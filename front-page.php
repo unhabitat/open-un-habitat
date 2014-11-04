@@ -4,9 +4,9 @@
    <div class="map">
       <div class="map-menu">
          <p class="map-results"></p>
-         <a href="#" class="map-btn bar-chart">Bar Chart</a> 
+         <!-- <a href="#" class="map-btn bar-chart">Bar Chart</a> 
          <a href="#" class="map-btn scatter-plot">Scatter Plot</a> 
-         <a href="#" class="map-btn circle-package">Circle Package</a> 
+         <a href="#" class="map-btn circle-package">Circle Package</a>  -->
          <a href="#" class="btn-visualisation">Switch to Visualisation</a> 
          <a href="#" class="btn-map">Switch to Map</a>
       </div>
@@ -18,16 +18,7 @@
 
             <div id="vis"></div>
 
-            <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> -->
-            <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
-
-            <script defer src="<?php echo get_stylesheet_directory_uri(); ?>/js/plugins.js"></script>
-            <script defer src="<?php echo get_stylesheet_directory_uri(); ?>/js/script.js"></script>
-            <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/CustomTooltip.js"></script>
-            <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/libs/coffee-script.js"></script>
-            <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/libs/d3.js"></script>
-            <script type="text/coffeescript" src="<?php echo get_stylesheet_directory_uri(); ?>/coffee/vis.coffee"></script>
-
+            
          </div>
          <div class="circle-package-wrapper project-vis-wrapper"></div>
       </div>
@@ -122,4 +113,12 @@
 
 
 </script>
+
+<script defer src="<?php echo get_stylesheet_directory_uri(); ?>/js/plugins.js"></script>
+<script defer src="<?php echo get_stylesheet_directory_uri(); ?>/js/script.js"></script>
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/CustomTooltip.js"></script>
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/libs/coffee-script.js"></script>
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/libs/d3.js"></script>
+<script type="text/coffeescript" src="<?php echo get_stylesheet_directory_uri(); ?>/coffee/vis.coffee"></script>
+
 <?php get_footer(); ?>

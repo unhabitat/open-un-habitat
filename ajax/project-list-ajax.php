@@ -4,6 +4,10 @@ if (isset($country_id)){
    $_REQUEST['countries__in'] = $country_id;
 }
 
+if (isset($donor_id)){
+   $_REQUEST['donors__in'] = $donor_id;
+}
+
 
 oipa_generate_results($objects, $meta, null);
 
@@ -12,7 +16,7 @@ if(empty($objects)){
 
    <div class="container projects">
    <div class="col-md-12">
-      <hr>No similar projects found.
+      <hr>No projects found.
    </div>
 
    <?php
@@ -37,18 +41,21 @@ foreach($objects AS $idx=>$activity) {
             $sep = ", ";
             for($i = 0;$i < count($activity->regions);$i++){
                if ($i == (count($activity->regions) - 1)){ $sep = ""; }
-               echo $activity->regions[$i]->name . $sep;
+               echo "<a href='" . home_url() . "/countries/?regions__in=" . $activity->regions[$i]->code . "'>" . $activity->regions[$i]->name . "</a>" . $sep;
             }
          } ?>
          </li>
-         <li class="state">State: 
+         <li class="state">
          <?php 
             if(!empty($activity->countries)) { 
+            echo "Country: ";
             $sep = ", ";
             for($i = 0;$i < count($activity->countries);$i++){
                if ($i == (count($activity->countries) - 1)){ $sep = ""; }
                echo "<a href='" . home_url() . "/country/" . $activity->countries[$i]->code . "/'>" . $activity->countries[$i]->name . "</a>" . $sep;   
-            }
+            } 
+         } else {
+            echo "&nbsp;";
          } ?>
          </li>
          <li class="donors">Donors: 

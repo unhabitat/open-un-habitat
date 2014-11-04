@@ -72,11 +72,14 @@ require('incl/pager.php');
          </table>
       </div>
       <?php } ?>
+
+
+      <?php /*
       <h2>Visualisation</h2>
       <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/dummy-visualisation.jpg" alt="dummy" class="img-responsive"/>
       
 
-      <?php /*
+      
       <p> Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Vestibulum id ligula porta felis euismod semper. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
       <h2>Donors</h2>
       <p> Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Vestibulum id ligula porta felis euismod semper. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>

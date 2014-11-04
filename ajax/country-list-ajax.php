@@ -10,7 +10,7 @@ if (isset($country_activities->objects)){
          <h2><a href="<?php echo home_url(); ?>/country/<?php echo $country->id; ?>/" class="view-details"><?php echo $country->name; ?></a></h2>
       </div>
       <div class="col-md-3 list-col">
-         <h2><?php echo "US$" . number_format($country->total_budget, 0, '', ','); ?></h2>
+         <h2><?php echo "US$" . number_format($country->total_budget, 0, '', '.'); ?></h2>
       </div>
       <div class="col-md-3 list-col">
          <h2><a href="<?php echo home_url(); ?>/country/<?php echo $country->id; ?>/" class="view-details"><?php echo $country->total_projects; ?> <?php echo 'project'; ?><?php if((int)$country->total_projects > 1){ echo "s"; } ?></a></h2>

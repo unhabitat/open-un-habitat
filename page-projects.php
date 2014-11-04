@@ -31,7 +31,7 @@ Template Name: Projects template
 
 
 <div class="container">
-   <div class="col-md-7 filter-results">Results <span id="project-list-amount"></span> of 264 Activity &gt; No filter selected</div>
+   <div class="col-md-7 filter-results">Results <span id="project-list-amount"></span> of <span id="total-project-amount"></span> Activity &gt; No filter selected</div>
    <div class="col-md-5 sort-by"> Sort by :
       <select id="sort-by-budget">
          <option value="0">Budget</option>
@@ -69,6 +69,13 @@ Template Name: Projects template
       filter.selection = Oipa.mainSelection;
       filter.init();
 
+      <?php 
+
+      if (isset($_GET['query'])){
+         echo "selection.query = '" . $_GET['query'] . "';";
+      }
+      ?>
+
       projectlist = new OipaProjectList();
       projectlist.list_div = "#project-list-wrapper";
       projectlist.pagination_div = "#project-list-pagination";
@@ -77,6 +84,10 @@ Template Name: Projects template
 
       map.refresh();
       projectlist.init();
+
+      var stats = new OipaMainStats();
+      var total_projects = stats.get_total_projects();
+
    });
 
 

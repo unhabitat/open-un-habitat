@@ -1254,13 +1254,13 @@ footer {
 
 }
 
-.scatter-popup-title{
+.scatter-popup-title, .leaflet-popup-title{
    font-weight: bold;
    padding: 2px 8px;
    font-size: 13px;
 }
 
-.scatter-popup-budget-header{
+.scatter-popup-budget-header, .leaflet-popup-budget-header{
    font-size: 11px;
    color: #00415E;
    background: #00A3D9;
@@ -1271,7 +1271,7 @@ footer {
    width: 20%;
 }
 
-.scatter-popup-budget-value{
+.scatter-popup-budget-value, .leaflet-popup-budget-value{
    display: inline-block;
    font-size: 21px;
    background: #00A3D9;
@@ -1300,4 +1300,42 @@ footer {
 
 #regions-filter-wrapper, #countries-filter-wrapper, #sectors-filter-wrapper, #budgets-filter-wrapper{
    display: inline-block;
+}
+
+#donor-filters .projects-filter{
+   margin-top: 0px;
+}
+
+
+.leaflet-popup-content-wrapper{
+   padding: 0;
+   background: #0070a2;
+   box-shadow: 0;
+   color: #fff;
+   border-radius: 0;
+}
+
+.leaflet-popup-title a{
+   color: #fff;
+}
+
+.leaflet-popup-content{
+   margin: 0;
+
+}
+
+
+.leaflet-popup-budget-wrapper{
+   width: 100%;
+   background: #00A3D9;
+   min-width: 100px;
+}
+
+.leaflet-popup-budget-header{
+
+   width: 60px;
+}
+
+.leaflet-popup-budget-value{
+   width: 40%;
 }

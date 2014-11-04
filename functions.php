@@ -1,5 +1,6 @@
 <?php
 function oipa_get_data_for_url($url) {
+
   $search_url = OIPA_URL . $url;
   $content = @file_get_contents($search_url);
   if ($content === false) { return false; }
@@ -12,12 +13,10 @@ function oipa_get_data_for_url($url) {
  */
 function refresh_elements() {
 
-	
 include( TEMPLATEPATH . '/constants.php' ); 
 include( TEMPLATEPATH . '/oipa-functions.php' ); 
 
-
-  $type = $_GET['call'];
+$type = $_GET['call'];
 
   if ($type === 'projects'){
   	include( TEMPLATEPATH . '/ajax/project-list-ajax.php' );
@@ -31,8 +30,33 @@ include( TEMPLATEPATH . '/oipa-functions.php' );
   	include( TEMPLATEPATH . '/ajax/ajax-list-sectors.php' );
   } else if ($type === 'donors'){
   	include( TEMPLATEPATH . '/ajax/donor-list-ajax.php' );
-  } else if ($type === 'homepage-total-projects'){
-    echo oipa_get_data_for_url('activity-aggregate-any/?format=json&group_by=reporting-org');
+  } else if ($type === 'total-projects'){
+
+    $url_add = "";
+    $org = DEFAULT_ORGANISATION_ID;
+    if (!empty($org)){
+      $url_add = "&reporting_organisation__in=" . DEFAULT_ORGANISATION_ID;
+    }
+
+    echo oipa_get_data_for_url('activity-aggregate-any/?format=json&group_by=reporting-org' . $url_add );
+  } else if ($type === 'total-donors'){
+
+    $url_add = "";
+    $org = DEFAULT_ORGANISATION_ID;
+    if (!empty($org)){
+      $url_add = "&reporting_organisation__in=" . DEFAULT_ORGANISATION_ID;
+    }
+
+    echo oipa_get_data_for_url('donor-activities/?format=json&limit=1' . $url_add );
+  } else if ($type === 'total-countries'){
+
+    $url_add = "";
+    $org = DEFAULT_ORGANISATION_ID;
+    if (!empty($org)){
+      $url_add = "&reporting_organisation__in=" . DEFAULT_ORGANISATION_ID;
+    }
+
+    echo oipa_get_data_for_url('country-activities/?format=json&limit=1' . $url_add );
   } else if ($type === 'homepage-total-budget'){
     echo oipa_get_data_for_url('activity-aggregate-any/?format=json&group_by=reporting-org&aggregation_key=total-budget');
   } else if ($type === 'homepage-major-programmes'){
@@ -58,7 +82,6 @@ include( TEMPLATEPATH . '/oipa-functions.php' );
   }
   
   exit();
-
 
 }
 

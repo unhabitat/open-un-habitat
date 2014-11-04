@@ -4,11 +4,12 @@ Template Name: Donors template
 */
 ?>
 <?php get_header(); ?>
-
+<div id="donor-filters">
 <?php include( TEMPLATEPATH .'/projects-filters.php' ); ?>
+</div>
 
 <div class="container">
-   <div class="col-md-7 filter-results">Results <span id="project-list-amount"></span> of 264 Activity &gt; No filter selected</div>
+   <div class="col-md-7 filter-results">Results <span id="current-grouped-list-count"></span> of <span id="total-donor-amount"></span> donors &gt; No filter selected</div>
    <div class="col-md-5 sort-by" style="text-align:right;"> Sort by :
       <select id="sort-by-budget">
          <option value="0">Budget</option>
@@ -17,14 +18,18 @@ Template Name: Donors template
       </select>
    </div>
 </div>
-<div class="container">
+<div class="container donor-list-wrapper">
    <div class="list-search">
       <div class="col-lg-6">
+         <form action="/" method="get">
          <div class="input-group">
-            <input type="text" class="form-control">
+            <input id="grouped-list-search" type="text" class="form-control" name="s">
             <span class="input-group-btn">
-            <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-            </span> </div>
+            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+            </span> 
+            
+         </div>
+         </form>
          <!-- /input-group --> 
       </div>
       <div class="clearfix"></div>
@@ -56,6 +61,10 @@ Template Name: Donors template
       otherlist.pagination_div = "#grouped-list-pagination";
       otherlist.selection = Oipa.mainSelection;
       otherlist.init();
+      Oipa.lists.push(otherlist);
+
+      var stats = new OipaMainStats();
+      stats.get_total_donors();
    });
 
 </script>

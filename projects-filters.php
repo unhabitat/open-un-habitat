@@ -28,11 +28,11 @@ $filter_options = oipa_get_filters();
     </div>
     <div id="budgets-filter-wrapper">
       <select data-size="10" name="budgets[]" class="selectpickr" data-filter-name="budgets" multiple data-selected-text-format="count" title='Budget' data-count-selected-text="{0} of {1} budgets" multiple>
-         <option value="0-20000">0 - 20,000</option>
-         <option value="20000-100000">20,000 - 100,000</option>
-         <option value="100000-1000000">100,000 - 1,000,000</option>
-         <option value="1000000-5000000">1,000,000 - 5,000,000</option>
-         <option value="5000000">5,000,000 ></option>
+         <option value="0-20000">0 - 20.000</option>
+         <option value="20000-100000">20.000 - 100.000</option>
+         <option value="100000-1000000">100.000 - 1.000.000</option>
+         <option value="1000000-5000000">1.000.000 - 5.000.000</option>
+         <option value="5000000">5.000.000 ></option>
       </select>
     </div>
 

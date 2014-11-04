@@ -26,14 +26,14 @@ $country_info = $country_info->objects[0];
 <div class="container country-detail">
    <div class="col-md-12">
       <h1><?php if(isset($country_info->name)){ echo $country_info->name; } ?></h1>
-      <p> Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna. </p>
+      <!-- <p> Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna. </p> -->
    </div>
 </div>
 <div class="container country-detail">
    <div class="col-md-12">
       <h3>Information</h3>
    </div>
-   <div class="col-md-3">
+   <div class="col-md-4">
       <p>Total<br>
          budget<span class="budget">US$<span> <?php echo number_format($country_info->total_budget, 0, '', '.'); ?></span></span></p>
       <hr>
@@ -84,11 +84,11 @@ $country_info = $country_info->objects[0];
    projectlist.list_div = "#project-list-wrapper";
    projectlist.pagination_div = "#project-list-pagination";
    projectlist.selection = Oipa.mainSelection;
-
+   projectlist.init();
    Oipa.lists.push(projectlist);
 
    map.refresh();
-   projectlist.init();
+   
 
 
 </script>

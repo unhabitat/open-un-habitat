@@ -7,8 +7,6 @@ function oipa_get_filters(){
 	return $filter_options;
 }
 
-
-
 function oipa_get_activity($identifier) {
 	if(empty($identifier)) return null;
 	$search_url = OIPA_URL . "activities/{$identifier}/?format=json";
@@ -228,6 +226,10 @@ function oipa_filter_request($search_url){
 
 	if(isset($_REQUEST['region'])) {
 		$search_url .= "&region=" . $_REQUEST['region'];
+	}
+
+	if(isset($_REQUEST['donor'])) {
+		$search_url .= "&donor=" . $_REQUEST['donor'];
 	}
 
 	if(isset($_REQUEST['order_by'])) {
