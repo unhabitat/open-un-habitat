@@ -7,23 +7,42 @@ $filter_options = oipa_get_filters();
 
    	<div id="regions-filter-wrapper">
       <select data-size="10" name="regions[]" class="selectpickr" data-filter-name="regions" multiple data-selected-text-format="count" title='Region' data-count-selected-text="{0} of {1} regions" multiple>
-      	<?php foreach($filter_options->regions as $option_key => $option){
-      		echo '<option value="'.$option_key.'">'.$option->name.'</option>';
-		}?>      
+      	
+        <?php 
+          $region_fo = array();
+          foreach($filter_options->regions as $option_key => $option){
+            $region_fo[$option_key] = $option->name;
+          }
+          asort($region_fo);
+          foreach($region_fo as $option_key => $option){
+            echo '<option value="'.$option_key.'">'.$option.'</option>';
+          }?>
 	  </select>
 	</div>
 	<div id="countries-filter-wrapper">
       <select data-size="10" name="countries[]" class="selectpickr" data-filter-name="countries" multiple data-selected-text-format="count" title='Country' data-count-selected-text="{0} of {1} countries" multiple>
-         <?php foreach($filter_options->countries as $option_key => $option){
-      		echo '<option value="'.$option_key.'">'.$option->name.'</option>';
-		}?>      
+         <?php 
+          $country_fo = array();
+          foreach($filter_options->countries as $option_key => $option){
+            $country_fo[$option_key] = $option->name;
+          }
+          asort($country_fo);
+          foreach($country_fo as $option_key => $option){
+            echo '<option value="'.$option_key.'">'.$option.'</option>';
+          }?>  
       </select>
     </div>
     <div id="sectors-filter-wrapper">
       <select data-size="10" name="sectors[]" class="selectpickr" data-filter-name="sectors" multiple data-selected-text-format="count" title='Sector' data-count-selected-text="{0} of {1} sectors" multiple>
-         <?php foreach($filter_options->sectors as $option_key => $option){
-      		echo '<option value="'.$option_key.'">'.$option->name.'</option>';
-		}?>   
+         <?php 
+          $sector_fo = array();
+          foreach($filter_options->sectors as $option_key => $option){
+            $sector_fo[$option_key] = $option->name;
+          }
+          asort($sector_fo);
+          foreach($sector_fo as $option_key => $option){
+            echo '<option value="'.$option_key.'">'.$option.'</option>';
+          }?>
       </select>
     </div>
     <div id="budgets-filter-wrapper">

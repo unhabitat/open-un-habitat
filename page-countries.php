@@ -78,7 +78,6 @@ Template Name: Countries template
       var stats = new OipaMainStats();
       stats.get_total_countries();
 
-
    });
 
 

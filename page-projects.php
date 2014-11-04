@@ -57,6 +57,12 @@ Template Name: Projects template
 
       var selection = new OipaSelection(1, 1);
       Oipa.mainSelection = selection;
+      <?php 
+
+      if (isset($_GET['query'])){
+         echo "selection.query = '" . $_GET['query'] . "';";
+      }
+      ?>
 
       var map = new OipaMap();
       map.set_map("map", 'topright');
@@ -69,12 +75,7 @@ Template Name: Projects template
       filter.selection = Oipa.mainSelection;
       filter.init();
 
-      <?php 
-
-      if (isset($_GET['query'])){
-         echo "selection.query = '" . $_GET['query'] . "';";
-      }
-      ?>
+      
 
       projectlist = new OipaProjectList();
       projectlist.list_div = "#project-list-wrapper";
