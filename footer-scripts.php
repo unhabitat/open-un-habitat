@@ -1,6 +1,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/bootstrap.min.js"></script> 
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/bootstrap-select.min.js"></script> 
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/cookie.min.js"></script>
 <script>
  $('.selectpickr').selectpicker();
  </script>

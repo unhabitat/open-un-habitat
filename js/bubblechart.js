@@ -52,7 +52,7 @@ BubbleChart = (function() {
         y: (this.height / 2) - 20
       }
     };
-    this.layout_gravity = -0.02;
+    this.layout_gravity = -0.01;
     this.damper = 0.1;
     this.vis = null;
     this.nodes = [];

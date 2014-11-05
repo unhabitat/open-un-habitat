@@ -7,7 +7,6 @@ Template Name: Country detail template
 <?php 
 
 // Country detail
-// var_dump($_SERVER);
 if (isset($_REQUEST['country_id'])){
    $country_id = $_REQUEST['country_id'];
 } else {
@@ -24,9 +23,10 @@ $country_info = $country_info->objects[0];
 
 <?php require('incl/pager.php'); ?>
 <div class="container country-detail">
-   <div class="col-md-12">
+   <div class="col-md-12 country-title">
+      <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/64x42/<?php echo $country_id; ?>.png" width="64" height="42" />
       <h1><?php if(isset($country_info->name)){ echo $country_info->name; } ?></h1>
-      <!-- <p> Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna. </p> -->
+      <!-- <p></p> -->
    </div>
 </div>
 <div class="container country-detail">

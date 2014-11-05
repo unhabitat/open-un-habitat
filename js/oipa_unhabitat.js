@@ -182,6 +182,28 @@ $(document).ready(function(){
 
 
 
+    $('#back-to-results').click(function(e){
+    	e.preventDefault();
+    	var lastpage = cookie.get('lastpage');
+
+    	if (lastpage != undefined){
+    		window.location.href = lastpage;
+    	} else {
+    		window.location.href = site_url + "/projects/";
+    	}
+    	console.log(lastpage);
+
+    });
+
+    $('#project-list-wrapper a, .map a, #grouped-list-wrapper a').click(function(e){
+    	var encoded_url = encodeURI(window.location.href);
+    	cookie.set('lastpage', encoded_url, {
+		   expires: 7, 
+		   path: "/"
+		});
+    	window.location.href = $(this).attr('href');
+    });
+
 
 
 });
@@ -196,3 +218,4 @@ function buttonUp(){
 		$('.searchbox-icon').css('display','block');
 	}
 }
+

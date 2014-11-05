@@ -1306,7 +1306,6 @@ footer {
    margin-top: 0px;
 }
 
-
 .leaflet-popup-content-wrapper{
    padding: 0;
    background: #0070a2;
@@ -1321,9 +1320,7 @@ footer {
 
 .leaflet-popup-content{
    margin: 0;
-
 }
-
 
 .leaflet-popup-budget-wrapper{
    width: 100%;
@@ -1332,10 +1329,19 @@ footer {
 }
 
 .leaflet-popup-budget-header{
-
    width: 60px;
 }
 
 .leaflet-popup-budget-value{
    width: 40%;
+}
+
+.country-title img, .country-title h1{
+   display: inline-block;
+}
+
+.country-title h1{
+   vertical-align: bottom;
+   margin-bottom: -5px;
+   margin-left: 9px;
 }
