@@ -67,6 +67,13 @@ class BubbleChart
     @nodes.sort (a,b) -> b.value - a.value
 
 
+  # node objects should be updated when filters are selected
+  # to not have to make any new nodes, the first try is to make filtered out nodes radius: 0
+  # then call the method to redraw 
+  refresh_nodes: () => 
+    
+
+
   # create svg at #vis and then 
   # create circle representation for each node
   create_vis: () =>

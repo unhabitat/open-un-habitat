@@ -42,43 +42,9 @@ var Oipa = {
 	},
 	visualisations : [],
 	refresh_visualisations : function(){
-
-		// remove old visualisation blocks
-		this.visualisations = [];
-		jQuery("#visualisation-block-wrapper").empty();
-
-		// add new visualisation blocks
-		Oipa.create_visualisations();
-
-	},
-	create_visualisations : function(){
-		var thisoipa = this;
-		data = this.mainSelection.indicators;
-		// for each indicator
-		jQuery.each(data, function(key, value){
-
-			// create line chart
-			var linechart = new OipaLineChart();
-			linechart.selection = new OipaIndicatorSelection();
-			linechart.selection.cities = thisoipa.mainSelection.cities;
-			linechart.selection.countries = thisoipa.mainSelection.countries;
-			linechart.selection.regions = thisoipa.mainSelection.regions;
-			linechart.selection.indicators.push({"id": value.id, "name": value.name, "type": value.type});
-
-			linechart.indicator = value.id;
-		 	linechart.name = value.name;
-			linechart.y_name = value.name;
-			linechart.y_format = d3.format(',r');
-			linechart.x_name = 'Time (Years)';
-			linechart.x_format = d3.format('r');
-
-			linechart.init();
-
-			thisoipa.visualisations.push(linechart);
-			
-		});
-
-
+		for (var i = 0; i < this.visualisations.length; i++){
+			this.visualisations[i].refresh();
+		}
 	},
 	lists: [],
 	refresh_lists : function(){
