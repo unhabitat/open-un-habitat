@@ -80,7 +80,7 @@ function OipaList(){
 
 	this.list_div = "#oipa-list";
 	this.pagination_div = "#oipa-list-pagination";
-	this.activity_count_div = "#project-list-amount";
+	this.activity_count_div = ".project-list-amount";
 
 	this.init = function(){
 		var thislist = this;
@@ -215,7 +215,7 @@ function OipaMainStats(){
 			contentType: "application/json",
 			dataType: 'json',
 			success: function(data){
-				jQuery("#total-project-amount").text(data[0].aggregation_field);
+				jQuery(".total-project-amount").text(data[0].aggregation_field);
 			}
 		});
 	};

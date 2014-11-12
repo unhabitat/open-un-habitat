@@ -13,3 +13,4 @@ define( 'EMPTY_LABEL', 'No information available');
 define( 'DEFAULT_ORGANISATION_ID', '41120');
 define( 'DEFAULT_ORGANISATION_NAME', 'UN-HABITAT');
 define( 'OIPA_PER_PAGE', 10);
+define( 'GOOGLE_ANALYTICS_CODE', 'UA-33916702-1');

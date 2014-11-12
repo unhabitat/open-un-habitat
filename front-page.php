@@ -3,7 +3,7 @@
 <div class="container">
    <div class="map">
       <div class="map-menu">
-         <p class="map-results"></p>
+         <p class="map-results">Results  <span id="project-list-amount"></span> of <span id="total-project-amount"></span> activities</p>
          <!-- <a href="#" class="map-btn bar-chart">Bar Chart</a> 
          <a href="#" class="map-btn scatter-plot">Scatter Plot</a> 
          <a href="#" class="map-btn circle-package">Circle Package</a>  -->

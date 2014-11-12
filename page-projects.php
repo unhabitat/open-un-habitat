@@ -8,7 +8,8 @@ Template Name: Projects template
 <div class="container">
    <div class="map">
       <div class="map-menu">
-         <p class="map-results"></p>
+         <p class="map-results">Results  <span class="project-list-amount"></span> of <span class="total-project-amount"></span> activities</p>
+
          <!-- <a href="#" class="map-btn bar-chart">Bar Chart</a>  -->
          <!-- <a href="#" class="map-btn scatter-plot">Scatter Plot</a>  -->
          <!-- <a href="#" class="map-btn circle-package">Circle Package</a>  -->
@@ -31,7 +32,7 @@ Template Name: Projects template
 
 
 <div class="container">
-   <div class="col-md-7 filter-results">Results <span id="project-list-amount"></span> of <span id="total-project-amount"></span> Activity &gt; No filter selected</div>
+   <div class="col-md-7 filter-results">Results <span class="project-list-amount"></span> of <span class="total-project-amount"></span> activities &gt; No filter selected</div>
    <div class="col-md-5 sort-by"> Sort by :
       <select id="sort-by-budget">
          <option value="0">Budget</option>
