@@ -6,11 +6,11 @@ Template Name: Countries template
 <?php get_header(); ?>
 
 <div class="container">
-   <div class="map"> <div id="map"></div></div>
+   <div class="map"> <div id="map" class="project-vis-wrapper"></div></div>
 </div>
-
+<div id="country-page-filters">
 <?php include( TEMPLATEPATH .'/projects-filters.php' ); ?>
-
+</div>
 <div class="container"> <!-- TO DO > total country count -->
    <div class="col-md-7 filter-results">Results <span id="current-grouped-list-count"></span> of <span id="total-country-amount"></span> Countries &gt; No filter selected</div>
    <div class="col-md-5 sort-by" style="text-align:right;"> Sort by :

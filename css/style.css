@@ -158,7 +158,7 @@ ul.navbar-nav {
 
 .project-vis-wrapper{
    width: 100%;
-   height: 400px;
+   height: 420px;
    display: block;
 }
 .bar-chart-wrapper, .scatter-plot-wrapper, .circle-package-wrapper{
@@ -1303,7 +1303,7 @@ footer {
 }
 
 #donor-filters .projects-filter{
-   margin-top: 0px;
+   margin-top: 16px;
 }
 
 .leaflet-popup-content-wrapper{
@@ -1344,4 +1344,8 @@ footer {
    vertical-align: bottom;
    margin-bottom: -5px;
    margin-left: 9px;
+}
+
+#country-page-filters #sectors-filter-wrapper, #country-page-filters #budgets-filter-wrapper, #donor-filters #sectors-filter-wrapper, #donor-filters #budgets-filter-wrapper{
+   display: none;
 }
