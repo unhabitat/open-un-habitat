@@ -18,7 +18,6 @@ if (isset($_GET['id'])){
 $activity = oipa_get_activity($id);
 
 
-
 require('incl/pager.php'); 
 
 ?>
@@ -37,8 +36,6 @@ require('incl/pager.php');
             <thead>
                <tr>
                   <th>Transaction type</th>
-                  <th>Provider Org</th>
-                  <th>Receiver Org</th>
                   <th>Value</th>
                   <th>Date</th>
                </tr>
@@ -62,7 +59,7 @@ require('incl/pager.php');
                           echo "Incoming Funds";
                           break;
                   }
-                  echo "</td><td></td><td></td><td>";
+                  echo "</td><td>";
                   echo "US$ " . number_format($transaction->value, 0, '', '.');
                   echo "</td><td>";
                   echo $transaction->value_date;
@@ -96,6 +93,16 @@ require('incl/pager.php');
       <?php } else {
          echo "No documents available.";
       } ?>
+
+      <?php if (!empty($activity->results)){ ?>
+
+      <h2>Results</h2>
+      <p> <?php foreach($activity->results as $result){ 
+         echo $result->description;
+      } ?>
+      </p>
+      <?php } ?>
+
    </div>
    <div class="col-md-3 col-md-pull-9">
       <?php /* niet meer van toepassing 
@@ -169,6 +176,49 @@ require('incl/pager.php');
             <div class="info-col-2"><strong><?php if (!empty($activity->activity_status)) { echo $activity->activity_status->name; } ?></strong></div>
             <div class="clearfix"></div>
          </div>
+
+         <?php 
+         if (!empty($activity->regions)) { ?>
+         <div class="info-row">
+            <div class="info-col-1">Regions</div>
+            <div class="info-col-2"><strong>
+               <?php 
+                  $regions = "";
+                  $sep = ", ";
+
+                  for($i = 0;$i < count($activity->regions);$i++){
+                     if ($i == (count($activity->regions) - 1)){ $sep = ""; }
+                     $regions .= $activity->regions[$i]->name . $sep;
+                  }
+
+                  echo $regions;
+              ?>
+            </strong></div>
+            <div class="clearfix"></div>
+         </div>
+         <?php  } ?>
+
+         <?php 
+         if (!empty($activity->countries)) { ?>
+         <div class="info-row">
+            <div class="info-col-1">Countries</div>
+            <div class="info-col-2"><strong>
+               <?php 
+                  $countries = "";
+                  $sep = ", ";
+
+                  for($i = 0;$i < count($activity->countries);$i++){
+                     if ($i == (count($activity->countries) - 1)){ $sep = ""; }
+                     $countries .= $activity->countries[$i]->name . $sep;
+                  }
+
+                  echo $countries;
+              ?>
+            </strong></div>
+            <div class="clearfix"></div>
+         </div>
+         <?php  } ?>
+
          <div class="info-row info-row-last">
             <div class="info-col-1">Participating organisations</div>
             <div class="info-col-2"><strong>
@@ -187,7 +237,16 @@ require('incl/pager.php');
             </strong></div>
             <div class="clearfix"></div>
          </div>
+
       </div>
+
+      <div class="widget">
+         <h3>Location</h3>
+            
+         <div id="project-detail-map"></div>
+         <div class="clearfix"></div>
+      </div>
+
       <div class="widget">
          <h3>Export project IATI data</h3>
          <div class="blue-col">
@@ -219,24 +278,29 @@ require('incl/pager.php');
          <div class="blue-col">
             <p>Embed code &lt;/&gt;</p>
             <div class="embed-code">  
-            <textarea><script type="text/javascript" src="<?php echo site_url(); ?>/wp-content/themes/rain/js/embed.js"></script><script>oipa_embed.options( url = "<?php echo site_url(); ?>/embed/<?php echo $id ?>/", width = 510, height = 1000);</script></textarea>
+            <textarea><script type="text/javascript" src="<?php echo site_url(); ?>/wp-content/themes/rain/js/embed.js"></script><script>oipa_embed.options( url = "<?php echo site_url(); ?>/embed/<?php echo $id ?>/", width = 600, height = 730);</script></textarea>
          </div>
 
             <a href="#" style="float:right" class="btn btn-primary">COPY</a>
             <div class="clearfix"></div>
          </div>
       </div>
+
+      
+
+      <?php if(!empty($activity->contact_info)){ ?>
       <div class="widget contact">
          <h3>Main contact</h3>
-         <?php if(!empty($activity->contact_info)){
+            <?php 
             foreach($activity->contact_info as $contact){
             ?>
             <h4><?php echo $contact->person_name; ?></h4>
             <p><a href="mailto:"><?php echo $contact->email; ?></a></p>
             <?php
             }  
-         }  ?>
+         ?>
       </div>
+      <?php } ?>
    </div>
 </div>
 <div class="container">
@@ -320,6 +384,44 @@ $_REQUEST['sectors__in'] = $sector_codes;
       projectlist.selection = Oipa.mainSelection;
       projectlist.init();
       Oipa.lists.push(projectlist);
+
+
+
+
+      var map = new OipaMap();
+      map.set_map("project-detail-map", null);
+      map.selection = Oipa.mainSelection;
+      map.selection.group_by = "country";
+      Oipa.maps.push(map);
+
+
+      <?php 
+
+
+      $region_codes = array();
+
+
+
+      if (!empty($activity->locations)) { 
+
+
+      } else if (!empty($activity->countries)) { 
+
+
+      } else if (!empty($activity->regions)) {
+
+         $loc_regions = array();
+         for($i = 0;$i < count($activity->regions);$i++){
+            // show regions on map
+            array_push($loc_regions, $activity->regions[$i]->code);
+         }
+         echo "map.show_project_detail_locations('regions', '" . implode(",", $loc_regions) . "');";
+      }
+      ?>
+
+
+
+
    });
 
 </script>

@@ -61,7 +61,11 @@ $type = $_GET['call'];
     echo oipa_get_data_for_url('activity-aggregate-any/?format=json&group_by=reporting-org&aggregation_key=total-budget');
   } else if ($type === 'homepage-major-programmes'){
     echo oipa_get_data_for_url('sector-activities/?format=json&sectors__in=1,2,3,4,5');
-  } else if (in_array($type, array(
+  } else if ($type === 'region-call'){
+    echo oipa_get_data_for_url('regions/?' . $_SERVER["QUERY_STRING"]);
+  } else if ($type === 'country-call'){
+    echo oipa_get_data_for_url('countries/?' . $_SERVER["QUERY_STRING"]);
+  }else if (in_array($type, array(
     'country-geojson',
     'activities',
     'country-activities',

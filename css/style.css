@@ -1349,3 +1349,33 @@ footer {
 #country-page-filters #sectors-filter-wrapper, #country-page-filters #budgets-filter-wrapper, #donor-filters #sectors-filter-wrapper, #donor-filters #budgets-filter-wrapper{
    display: none;
 }
+
+#embed-page{
+   padding-top: 0;
+   min-height: 500px;
+   background: transparent;
+   width: 600px;
+}
+
+#embed-page .row{
+   width: 600px;
+}
+
+#embed-page #project-detail-map{
+   height: 370px;
+}
+
+
+#embed-page .project-title a{
+   color: #1C7FD7;
+}
+
+
+#embed-page .project-description{
+   padding-right: 10px;
+}
+
+#embed-page .widget h3{
+   padding-top: 0;
+   margin-top: 0;
+}

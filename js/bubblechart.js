@@ -26,7 +26,7 @@ BubbleChart = (function() {
       x: this.width / 2,
       y: this.height / 2
     };
-    this.year_centers = {
+    this.group_centers = {
       "Africa, regional": {
         x: 155,
         y: (this.height / 2) - 20
@@ -220,14 +220,19 @@ BubbleChart = (function() {
       };
     })(this));
     this.force.start();
+
+    
+
     return this.display_years();
   };
+
+  
 
   BubbleChart.prototype.move_towards_year = function(alpha) {
     return (function(_this) {
       return function(d) {
         var target;
-        target = _this.year_centers[d.year];
+        target = _this.group_centers[d.year];
         d.x = d.x + (target.x - d.x) * (_this.damper + -0.03) * alpha * 1.1;
         return d.y = d.y + (target.y - d.y) * (_this.damper + -0.03) * alpha * 1.5;
       };
@@ -235,25 +240,62 @@ BubbleChart = (function() {
   };
 
   BubbleChart.prototype.display_years = function() {
-    var header, rect, years, years_data, years_x;
-    years_x = {
-      "Africa": 65,
-      "Asia": 225,
-      "Bilateral": 375,
-      "Europe": 488,
-      "Middle East": 602,
-      "South America": 740
+
+    var header, rect, groups, groups_data, groups_x;
+    groups_x = {
+      "Africa, regional": { "x": 65, "label" : "Africa"},
+      "Asia, regional": { "x": 225, "label" : "Asia"},
+      "Bilateral, unspecified": { "x": 375, "label" : "Bilateral"},
+      "Europe, regional": { "x": 488, "label" : "Europe"},
+      "Middle East": { "x": 602, "label" : "Middle East"},
+      "South America": { "x": 740, "label" : "South America"},
     };
-    years_data = d3.keys(years_x);
+    groups_data = d3.keys(groups_x);
     rect = this.vis.append("svg:rect").attr("x", 0).attr("y", this.height - 120).attr("height", 1).attr("width", this.width).attr("fill", "#0070A2");
     header = this.vis.append("text").attr("class", "scatter-plot-header").attr("x", 0).attr("y", 60).attr("text-anchor", "left").text("Budget per project for region");
-    years = this.vis.selectAll(".years").data(years_data);
-    return years.enter().append("text").attr("class", "years").attr("x", (function(_this) {
+    groups = this.vis.selectAll(".years").data(groups_data);
+    
+    var that = this;
+    
+    this.force.on("end", function(){ 
+
+      Oipa.visualisations[0].group_aggregation = {
+        "Africa, regional": {"count": 0, "x_sum": 0},
+        "Asia, regional": {"count": 0, "x_sum": 0},
+        "Bilateral, unspecified": {"count": 0, "x_sum": 0},
+        "Europe, regional": {"count": 0, "x_sum": 0},
+        "Middle East, regional": {"count": 0, "x_sum": 0},
+        "South America, regional": {"count": 0, "x_sum": 0},
+      };
+
+      that.circles.each(function(d){
+        Oipa.visualisations[0].group_aggregation[d.group]["count"] = Oipa.visualisations[0].group_aggregation[d.group]["count"] + 1;
+        Oipa.visualisations[0].group_aggregation[d.group]["x_sum"] = Oipa.visualisations[0].group_aggregation[d.group]["x_sum"] + d.x;
+      });
+
+
+      var group_keys = Object.keys(that.group_aggregation);
+      for (var i = 0;i < group_keys.length;i++){
+        var x_pos = (that.group_aggregation[group_keys[i]].x_sum / that.group_aggregation[group_keys[i]].count);
+        $(".group-"+group_keys[i]).attr("x", x_pos);
+
+      }
+
+    });
+      
+
+
+
+    return groups.enter().append("text").attr("class", (function(_this) {
       return function(d) {
-        return years_x[d];
+        return "years group-" + groups_x[d].label;
+      };
+    })(this)).attr("x", (function(_this) {
+      return function(d) {
+        return groups_x[d].x;
       };
     })(this)).attr("y", this.height - 94).attr("text-anchor", "middle").text(function(d) {
-      return d;
+      return groups_x[d].label;
     });
   };
 

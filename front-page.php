@@ -111,6 +111,9 @@
 
    map.refresh();
 
+   var stats = new OipaMainStats();
+   stats.get_total_projects();
+
 
 </script>
 

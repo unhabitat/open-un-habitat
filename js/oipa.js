@@ -215,6 +215,7 @@ function OipaMainStats(){
 			contentType: "application/json",
 			dataType: 'json',
 			success: function(data){
+				jQuery("#project-list-amount, #total-project-amount").text(data[0].aggregation_field);
 				jQuery(".total-project-amount").text(data[0].aggregation_field);
 			}
 		});
@@ -462,7 +463,7 @@ function OipaMap(){
 			continuousWorld: 'false'
 		}
 
-		if(zoomposition){
+		if(zoomposition || zoomposition == null){
 			mapoptions.zoomControl = false;
 		}
 
@@ -665,7 +666,6 @@ function OipaMap(){
 		function showPopup(e){
 		    var layer = e.target;
 
-		    console.log(layer);
 		    var mostNorth = layer.getBounds().getNorthWest().lat;
 		    var mostSouth = layer.getBounds().getSouthWest().lat;
 		    var center = layer.getBounds().getCenter();
@@ -719,6 +719,59 @@ function OipaMap(){
 		}
 		
 	};
+
+	this.show_project_detail_locations = function(administrative_level, terms){
+
+		if(administrative_level == "locations"){
+			// show exact location markers if exact location
+			// show polygon (if available) if its an adm1 region
+
+		} else if (administrative_level == "countries"){
+			// show country polygons
+			var url = site_url + ajax_path + '&format=json&call=countries&countries__in=' + terms;
+			var self = this;
+
+			terms = terms.split();
+			for (var i = 0;i < term.length; i++){
+				jQuery.ajax({
+					type: 'GET',
+					url: url,
+					contentType: "application/json",
+					dataType: 'json',
+					success: function(data){
+						// show polygon on map
+						for (var i = 0; i < data.objects.length;i++){
+							L.polygon(data.objects[i].polygon).addTo(map);
+						}
+					}
+				});
+			}
+
+			
+		} else if (administrative_level == "regions"){
+
+			// show region markers
+			var url = site_url + ajax_path + '&format=json&call=regions&regions__in=' + terms;
+			var self = this;
+
+			console.log(url);
+
+			jQuery.ajax({
+				type: 'GET',
+				url: url,
+				contentType: "application/json",
+				dataType: 'json',
+				success: function(data){
+					console.log(data);
+					// show markers on map
+					for (var i = 0; i < data.objects.length;i++){
+						var center_longlat = geo_point_to_latlng(data.objects[i].center_longlat);
+						var marker = L.marker(center_longlat).addTo(self.map);
+					}
+				}
+			});
+		}
+	}
 
 	this.set_bounds_and_center = function(){
 		var bounds = this.get_markers_bounds();
