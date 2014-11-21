@@ -728,20 +728,45 @@ function OipaMap(){
 
 		} else if (administrative_level == "countries"){
 			// show country polygons
-			var url = site_url + ajax_path + '&format=json&call=countries&countries__in=' + terms;
 			var self = this;
 
-			terms = terms.split();
-			for (var i = 0;i < term.length; i++){
+			terms = terms.split(",");
+			var response_count = 0;
+			for (var i = 0;i < terms.length; i++){
+
+				var url = site_url + ajax_path + '&format=json&call=country&country=' + terms[i];
+				
 				jQuery.ajax({
 					type: 'GET',
 					url: url,
 					contentType: "application/json",
 					dataType: 'json',
 					success: function(data){
+
 						// show polygon on map
-						for (var i = 0; i < data.objects.length;i++){
-							L.polygon(data.objects[i].polygon).addTo(map);
+						if(data.polygon){
+							var pol = JSON.parse(data.polygon);
+							var polygon = L.geoJson(pol, {
+								style: {
+									"color": "#2581D4",
+									// "fillColor": "#ff7800",
+								    "weight": 1,
+								    "opacity": 0.85
+								} 
+							}).addTo(self.map);
+							response_count++;
+
+							if ((response_count + 1) == terms.length){
+								var center = polygon.getBounds().getCenter();
+								self.map.setView(center, 1);
+								var bounds = polygon.getBounds();
+								if (terms.length == 1){
+									setTimeout(
+									  function(){
+									    self.map.fitBounds(bounds);
+									  }, 800);
+								}
+							}
 						}
 					}
 				});
@@ -749,27 +774,27 @@ function OipaMap(){
 
 			
 		} else if (administrative_level == "regions"){
-
-			// show region markers
-			var url = site_url + ajax_path + '&format=json&call=regions&regions__in=' + terms;
 			var self = this;
 
-			console.log(url);
+			terms = terms.split(",");
+			var response_count = 0;
+			for (var i = 0;i < terms.length; i++){
 
-			jQuery.ajax({
-				type: 'GET',
-				url: url,
-				contentType: "application/json",
-				dataType: 'json',
-				success: function(data){
-					console.log(data);
-					// show markers on map
-					for (var i = 0; i < data.objects.length;i++){
-						var center_longlat = geo_point_to_latlng(data.objects[i].center_longlat);
-						var marker = L.marker(center_longlat).addTo(self.map);
+				var url = site_url + ajax_path + '&format=json&call=region&region=' + terms[i];
+			
+				jQuery.ajax({
+					type: 'GET',
+					url: url,
+					contentType: "application/json",
+					dataType: 'json',
+					success: function(data){
+						if(data.center_longlat){
+							var center_longlat = geo_point_to_latlng(data.center_longlat);
+							var marker = L.marker(center_longlat).addTo(self.map);
+						}
 					}
-				}
-			});
+				});
+			}
 		}
 	}
 

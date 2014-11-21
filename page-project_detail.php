@@ -331,7 +331,7 @@ $_REQUEST['sectors__in'] = $sector_codes;
 ?>
 
 <div id="project-list-wrapper">
-   <?php include( TEMPLATEPATH .'/ajax/project-list-ajax.php' ); ?>
+   <?php include( TEMPLATEPATH .'/ajax/related-project-list-ajax.php' ); ?>
 </div>
 <div id="project-list-pagination" style="text-align:center"></div>
 
@@ -393,6 +393,7 @@ $_REQUEST['sectors__in'] = $sector_codes;
       map.selection = Oipa.mainSelection;
       map.selection.group_by = "country";
       Oipa.maps.push(map);
+      
 
 
       <?php 
@@ -406,7 +407,12 @@ $_REQUEST['sectors__in'] = $sector_codes;
 
 
       } else if (!empty($activity->countries)) { 
-
+         $loc_countries = array();
+         for($i = 0;$i < count($activity->countries);$i++){
+            // show regions on map
+            array_push($loc_countries, $activity->countries[$i]->code);
+         }
+         echo "map.show_project_detail_locations('countries', '" . implode(",", $loc_countries) . "');";
 
       } else if (!empty($activity->regions)) {
 
@@ -425,7 +431,6 @@ $_REQUEST['sectors__in'] = $sector_codes;
    });
 
 </script>
-
 
 
 <?php get_footer(); ?>
