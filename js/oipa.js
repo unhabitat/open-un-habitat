@@ -1048,8 +1048,46 @@ function OipaFilters(){
 		if (!Oipa.default_organisation_id){
 			this.selection.reporting_organisations = this.get_checked_by_filter("reporting_organisations");
 		}
-		
+		this.fill_filter_selection_string();
 	};
+
+	this.fill_filter_selection_string = function(){
+
+		var html = "";
+		var is_selection = false;
+		// region, country, sector, budget, search
+
+		// for each of the above
+		function add_to_selection_string(html, arr){
+			for (var i = 0;i < arr.length;i++){
+				
+				if (html.length > 0){ // add comma
+					html += ", " + arr[i].name;
+				} else {
+					html = arr[i].name;
+				}
+			}
+			return html;
+		}
+
+		html = add_to_selection_string(html, this.selection.regions);
+		html = add_to_selection_string(html, this.selection.countries);
+		html = add_to_selection_string(html, this.selection.sectors);
+		html = add_to_selection_string(html, this.selection.budgets);
+
+		if (this.selection.query){
+			html += "'" + this.selection.query + "'";
+		}
+
+		if (html.length > 0){
+			html = "Filters selected: " + html;
+		} else {
+			html = "No filter selected";
+		}
+
+		$(".filters-selected-text").html(html);
+
+	}
 
 	this.get_selection_object = function(){
 		// set selection as filter and load results

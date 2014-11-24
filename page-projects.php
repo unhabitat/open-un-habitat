@@ -32,7 +32,7 @@ Template Name: Projects template
 
 
 <div class="container">
-   <div class="col-md-7 filter-results">Results <span class="project-list-amount"></span> of <span class="total-project-amount"></span> activities &gt; No filter selected</div>
+   <div class="col-md-7 filter-results">Results <span class="project-list-amount"></span> of <span class="total-project-amount"></span> activities &gt; <span class="filters-selected-text">No filter selected</span></div>
    <div class="col-md-5 sort-by"> Sort by :
       <select id="sort-by-budget">
          <option value="0">Budget</option>

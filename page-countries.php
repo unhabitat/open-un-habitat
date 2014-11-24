@@ -12,7 +12,7 @@ Template Name: Countries template
 <?php include( TEMPLATEPATH .'/projects-filters.php' ); ?>
 </div>
 <div class="container"> <!-- TO DO > total country count -->
-   <div class="col-md-7 filter-results">Results <span id="current-grouped-list-count"></span> of <span id="total-country-amount"></span> Countries &gt; No filter selected</div>
+   <div class="col-md-7 filter-results">Results <span id="current-grouped-list-count"></span> of <span id="total-country-amount"></span> Countries &gt; <span class="filters-selected-text">No filter selected</span></div>
    <div class="col-md-5 sort-by" style="text-align:right;"> Sort by :
       <select id="sort-by-budget">
          <option value="0">Budget</option>
