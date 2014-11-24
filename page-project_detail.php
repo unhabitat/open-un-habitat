@@ -60,7 +60,7 @@ require('incl/pager.php');
                           break;
                   }
                   echo "</td><td>";
-                  echo "US$ " . number_format($transaction->value, 0, '', '.');
+                  echo "US$ " . number_format($transaction->value, 0, '', ',');
                   echo "</td><td>";
                   echo $transaction->value_date;
                   echo "</td></tr>";
@@ -131,11 +131,10 @@ require('incl/pager.php');
             <div class="info-col-2 info-budget-price"><strong>US$ <span>
 
                <?php if(!empty($activity->total_budget)) {
-                  echo number_format($activity->total_budget, 0, '', '.');
+                  echo number_format($activity->total_budget, 0, '', ',');
                } else {
                   echo "-";
                } ?>
-
 
             </span></strong></div>
             <div class="clearfix"></div>

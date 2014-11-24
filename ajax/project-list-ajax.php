@@ -74,7 +74,7 @@ foreach($objects AS $idx=>$activity) {
       </ul>
    </div>
    <div class="col-md-3 project-col-3">
-      <p><strong>Budget</strong><span class="budget">US$<span> <?php if(!empty($activity->total_budget)) { echo number_format($activity->total_budget, 0, '', '.');  } ?></span></p>
+      <p><strong>Budget</strong><span class="budget">US$<span> <?php if(!empty($activity->total_budget)) { echo number_format($activity->total_budget, 0, '', ',');  } ?></span></p>
       <hr>
       <p>IATI Identifier<span class="float-right"><?php if(!empty($activity->iati_identifier)) { echo "<a href='" . home_url() . "/project/" . $activity->iati_identifier . "/'>" . $activity->iati_identifier . "</a>"; } ?></span></p>
       <hr>

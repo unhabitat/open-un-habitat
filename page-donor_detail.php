@@ -31,7 +31,7 @@ if (isset($_REQUEST['donor_id'])){
    </div>
    <div class="col-md-4">
       <p>Total<br>
-         budget<span class="budget">US$<span> <?php echo number_format($donor_info->total_budget, 0, '', '.'); ?></span></span></p>
+         budget<span class="budget">US$<span> <?php echo number_format($donor_info->total_budget, 0, '', ','); ?></span></span></p>
       <hr>
       <p>Number of active<br>
          projects<span class="big-text" class="float-right"><?php if(isset($donor_info->total_projects)){ echo $donor_info->total_projects; } ?></span></p>

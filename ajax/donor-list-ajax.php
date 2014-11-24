@@ -8,7 +8,7 @@ foreach($donor_activities->objects AS $idx=>$donor) { ?>
       <h2><a href="<?php echo home_url(); ?>/donor/<?php echo $donor->id; ?>/" class="view-details"><?php echo $donor->name; ?></a></h2>
    </div>
    <div class="col-md-3 list-col">
-      <h2><?php echo "US$" . number_format($donor->total_budget, 0, '', '.'); ?></h2>
+      <h2><?php echo "US$" . number_format($donor->total_budget, 0, '', ','); ?></h2>
    </div>
    <div class="col-md-3 list-col">
       <h2><a href="<?php echo home_url(); ?>/donor/<?php echo $donor->id; ?>/" class="view-details"><?php echo $donor->total_projects; ?> <?php echo 'project'; ?><?php if((int)$donor->total_projects > 1){ echo "s"; } ?></a></h2>
