@@ -754,7 +754,7 @@ function OipaMap(){
 								    "opacity": 0.85
 								} 
 							}).addTo(self.map);
-							response_count++;
+							
 
 							if ((response_count + 1) == terms.length){
 								var center = polygon.getBounds().getCenter();
@@ -767,6 +767,7 @@ function OipaMap(){
 									  }, 800);
 								}
 							}
+							response_count++;
 						}
 					}
 				});

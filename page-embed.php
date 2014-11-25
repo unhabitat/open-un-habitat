@@ -278,7 +278,12 @@ $activity = oipa_get_activity($id);
 
 
       } else if (!empty($activity->countries)) { 
-
+         $loc_countries = array();
+         for($i = 0;$i < count($activity->countries);$i++){
+            // show regions on map
+            array_push($loc_countries, $activity->countries[$i]->code);
+         }
+         echo "map.show_project_detail_locations('countries', '" . implode(",", $loc_countries) . "');";
 
       } else if (!empty($activity->regions)) {
 
