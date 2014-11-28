@@ -27,27 +27,27 @@ BubbleChart = (function() {
       y: this.height / 2
     };
     this.group_centers = {
-      "Africa, regional": {
+      "298": {
         x: 155,
         y: (this.height / 2) - 20
       },
-      "Asia, regional": {
+      "798": {
         x: 254,
         y: (this.height / 2) - 20
       },
-      "Bilateral, unspecified": {
+      "998": {
         x: 354,
         y: (this.height / 2) - 20
       },
-      "Europe, regional": {
+      "89": {
         x: 457,
         y: (this.height / 2) - 20
       },
-      "Middle East, regional": {
+      "589": {
         x: 558,
         y: (this.height / 2) - 20
       },
-      "South America, regional": {
+      "489": {
         x: 658,
         y: (this.height / 2) - 20
       }
@@ -58,7 +58,7 @@ BubbleChart = (function() {
     this.nodes = [];
     this.force = null;
     this.circles = null;
-    this.fill_color = d3.scale.ordinal().domain(["Africa, regional", "Asia, regional", "Bilateral, unspecified", "Europe, regional", "Middle East, regional", "South America, regional"]).range(["#006FA1", "#149CCB", "#1A5565", "#0AC7F3", "#76DBF6", "#3B82A1"]);
+    this.fill_color = d3.scale.ordinal().domain(["298", "798", "998", "89", "589", "489"]).range(["#006FA1", "#149CCB", "#1A5565", "#0AC7F3", "#76DBF6", "#3B82A1"]);
     max_amount = d3.max(this.data, function(d) {
       return parseInt(d.total_budget);
     });
@@ -71,6 +71,7 @@ BubbleChart = (function() {
 
     this.data.forEach((function(_this) {
       return function(d) {
+
         var node;
         node = {
           id: d.id + d.code,
@@ -79,12 +80,13 @@ BubbleChart = (function() {
           value: d.total_budget,
           name: d.title,
           org: d.name,
-          group: d.name,
+          group: d.code,
           year: d.name,
           x: Math.random() * 900,
           y: Math.random() * 800
         };
         return _this.nodes.push(node);
+        
       };
     })(this));
     return this.nodes.sort(function(a, b) {
@@ -232,7 +234,7 @@ BubbleChart = (function() {
     return (function(_this) {
       return function(d) {
         var target;
-        target = _this.group_centers[d.year];
+        target = _this.group_centers[d.group];
         d.x = d.x + (target.x - d.x) * (_this.damper + -0.03) * alpha * 1.1;
         return d.y = d.y + (target.y - d.y) * (_this.damper + -0.03) * alpha * 1.5;
       };
@@ -243,29 +245,29 @@ BubbleChart = (function() {
 
     var header, rect, groups, groups_data, groups_x;
     groups_x = {
-      "Africa, regional": { "x": 65, "label" : "Africa"},
-      "Asia, regional": { "x": 225, "label" : "Asia"},
-      "Bilateral, unspecified": { "x": 375, "label" : "Bilateral"},
-      "Europe, regional": { "x": 488, "label" : "Europe"},
-      "Middle East": { "x": 602, "label" : "Middle East"},
-      "South America": { "x": 740, "label" : "South America"},
+      "289": { "x": 65, "label" : "Africa"},
+      "798": { "x": 225, "label" : "Asia"},
+      "998": { "x": 375, "label" : "Bilateral"},
+      "89": { "x": 488, "label" : "Europe"},
+      "589": { "x": 602, "label" : "Middle East"},
+      "489": { "x": 740, "label" : "South America"},
     };
+
     groups_data = d3.keys(groups_x);
     rect = this.vis.append("svg:rect").attr("x", 0).attr("y", this.height - 120).attr("height", 1).attr("width", this.width).attr("fill", "#0070A2");
     header = this.vis.append("text").attr("class", "scatter-plot-header").attr("x", 0).attr("y", 60).attr("text-anchor", "left").text("Budget per project for region");
     groups = this.vis.selectAll(".years").data(groups_data);
     
     var that = this;
-    
     this.force.on("end", function(){ 
 
       Oipa.visualisations[0].group_aggregation = {
-        "Africa, regional": {"count": 0, "x_sum": 0},
-        "Asia, regional": {"count": 0, "x_sum": 0},
-        "Bilateral, unspecified": {"count": 0, "x_sum": 0},
-        "Europe, regional": {"count": 0, "x_sum": 0},
-        "Middle East, regional": {"count": 0, "x_sum": 0},
-        "South America, regional": {"count": 0, "x_sum": 0},
+        "289": {"count": 0, "x_sum": 0},
+        "798": {"count": 0, "x_sum": 0},
+        "998": {"count": 0, "x_sum": 0},
+        "89": {"count": 0, "x_sum": 0},
+        "589": {"count": 0, "x_sum": 0},
+        "489": {"count": 0, "x_sum": 0},
       };
 
       that.circles.each(function(d){
