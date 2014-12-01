@@ -468,7 +468,7 @@ function OipaMap(){
 		}
 
 		jQuery("#"+div_id).css("min-height", "200px");
-		this.map = L.map(div_id, mapoptions).setView([3.505, -15.00], 2);
+		this.map = L.map(div_id, mapoptions).setView([3.505, 18.00], 2);
 
 		if (zoomposition){
 			new L.Control.Zoom({ position: zoomposition }).addTo(this.map);
