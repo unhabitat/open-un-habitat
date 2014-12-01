@@ -277,7 +277,7 @@ require('incl/pager.php');
          <div class="blue-col">
             <p>Embed code &lt;/&gt;</p>
             <div class="embed-code">  
-            <textarea><script type="text/javascript" src="<?php echo site_url(); ?>/wp-content/themes/rain/js/embed.js"></script><script>oipa_embed.options( url = "<?php echo site_url(); ?>/embed/<?php echo $id ?>/", width = 600, height = 730);</script></textarea>
+            <textarea><script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/js/embed.js"></script><script>oipa_embed.options( url = "<?php echo site_url(); ?>/embed/<?php echo $id ?>/", width = 600, height = 730);</script></textarea>
          </div>
 
             <a href="#" style="float:right" class="btn btn-primary">COPY</a>
