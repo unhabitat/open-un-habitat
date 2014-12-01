@@ -16,4 +16,5 @@ Template Name: Page with right sidebar
       <?php dynamic_sidebar('right-widget-area'); ?>
    </div>
 </div>
+<?php include( TEMPLATEPATH .'/footer-scripts.php' ); ?>
 <?php get_footer(); ?>

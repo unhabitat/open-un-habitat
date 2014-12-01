@@ -8,4 +8,5 @@
       <?php endwhile; endif; ?>
    </div>
 </div>
+<?php include( TEMPLATEPATH .'/footer-scripts.php' ); ?>
 <?php get_footer(); ?>

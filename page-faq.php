@@ -12,4 +12,5 @@ while ( have_posts() ) : the_post();
 endwhile;
 ?>
 </div>
+<?php include( TEMPLATEPATH .'/footer-scripts.php' ); ?>
 <?php get_footer(); ?>
