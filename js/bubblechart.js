@@ -331,7 +331,7 @@ BubbleChart = (function() {
     var content;
     d3.select(element).attr("fill", "red");
     content = "<div class='scatter-popup-wrapper'>";
-    content += "<div class='scatter-popup-region'>" + data.group + "</div>";
+    content += "<div class='scatter-popup-region'>" + data.org + "</div>";
     content += "<div class='scatter-popup-title'> " + data.name + "</div>";
     content += "<div class='scatter-popup-budget-header'>Budget<br>US$</div><div class='scatter-popup-budget-value'> $" + (addCommas(data.value)) + "</div>";
     content += "<div class='scatter-popup-visit'>Click to visit the project page</div>";

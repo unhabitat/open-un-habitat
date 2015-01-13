@@ -803,6 +803,8 @@ body {
 }
 }
 
+
+
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) and (max-width: 991px) {
 .gray-col-home {
@@ -835,6 +837,9 @@ body {
    position: relative;
 }
 }
+
+
+
 
 @media only screen and (max-width : 768px) {
 body {
@@ -881,6 +886,7 @@ ul.navbar-nav {
 .dashboard-menu {
    position: relative;
 }
+
 }
 
 /* Extra Small Devices, Phones */ 
@@ -905,6 +911,7 @@ ul.navbar-nav {
 .top-pager a {
    font-size: 12px;
 }
+
 }
 
 /* Custom, iPhone Retina */ 

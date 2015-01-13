@@ -289,8 +289,6 @@ function OipaMainStats(){
 			dataType: 'json',
 			success: function(data){
 
-				console.log(data[0]);
-
 				var options = {
 				  useEasing : true, 
 				  useGrouping : true, 
