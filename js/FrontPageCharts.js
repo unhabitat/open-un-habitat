@@ -108,7 +108,7 @@ SectorPieChart.prototype.format_data = function(){
 
         data.push({
             value: value,
-            color: "#"+Math.floor(Math.random()*16777215).toString(16),
+            color: randomColor(),
             highlight: "#FFC870",
             label: sector_name
         });
@@ -330,7 +330,7 @@ CountryPieChart.prototype.format_data = function(){
 
         data.push({
             value: value,
-            color: "#"+Math.floor(Math.random()*16777215).toString(16),
+            color: randomColor(),
             highlight: "#FFC870",
             label: label
         });
@@ -510,7 +510,7 @@ DonorPieChart.prototype.format_data = function(){
 
         data.push({
             value: value,
-            color: "#"+Math.floor(Math.random()*16777215).toString(16),
+            color: randomColor(),
             highlight: "#FFC870",
             label: label
         });

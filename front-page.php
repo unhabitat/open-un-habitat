@@ -277,6 +277,7 @@ if (Math.random() > 0.5){
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/CustomTooltip.js"></script>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/libs/d3.js"></script>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/bubblechart.js"></script>
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/randomColor.js"></script>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/FrontPageCharts.js"></script>
 
 
