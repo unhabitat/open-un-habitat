@@ -262,10 +262,50 @@ function OipaMainStats(){
 			contentType: "application/json",
 			dataType: 'json',
 			success: function(data){
-				jQuery("#homepage-total-budget").text("US$" + comma_formatted(data[reporting_organisation]));
+				var options = {
+				  useEasing : true, 
+				  useGrouping : true, 
+				  separator : ',', 
+				  decimal : '.',
+				  prefix : '',
+				  suffix : '' 
+				}
+
+				var total_budget = new countUp("total-budget", 0, data[0].aggregation_field, 0, 2.5, options);
+				total_budget.start();
 			}
 		});
 	};
+
+	this.get_total_expenditure = function(reporting_organisation){
+
+		var url = site_url + ajax_path + '&call=homepage-total-expenditure';
+		var stats = this;
+		
+		jQuery.ajax({
+			type: 'GET',
+			url: url,
+			contentType: "application/json",
+			dataType: 'json',
+			success: function(data){
+
+				console.log(data[0]);
+
+				var options = {
+				  useEasing : true, 
+				  useGrouping : true, 
+				  separator : ',', 
+				  decimal : '.',
+				  prefix : '',
+				  suffix : '' 
+				}
+
+				var total_expenditures = new countUp("total-expenditures", 0, data[0].aggregation_field, 0, 2.5, options);
+				total_expenditures.start();
+			}
+		});
+	};
+
 
 	this.load_major_programmes = function(){
 
@@ -676,7 +716,7 @@ function OipaMap(){
 
 		    var popup_html = "<div class='leaflet-popup-wrapper'>"
     		popup_html += "<div class='leaflet-popup-title'><a href='"+home_url+"/country/"+layer.feature.id+"/'>" + layer.feature.properties.name + "</a></div>"
-    		popup_html += "<div class='leaflet-popup-budget-wrapper'><div class='leaflet-popup-budget-header'>Total projects</div><div class='leaflet-popup-budget-value'> " + layer.feature.properties.project_amount + "</div>"
+    		popup_html += "<div class='leaflet-popup-budget-wrapper'>Total projects: <span>" + layer.feature.properties.project_amount + "</span></div>"
     		popup_html += "</div></div>"
 
     		// .setContent('<div id="map-tip-header">' + layer.feature.properties.name + '</div><div id="map-tip-text">Total projects: '+ layer.feature.properties.project_amount + '</div><div id="map-tip-link"><a href="'+home_url+'/country/'+layer.feature.id+'/">View country</a></div>')

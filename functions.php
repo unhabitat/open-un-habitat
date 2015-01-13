@@ -58,8 +58,10 @@ $type = $_GET['call'];
 
     echo oipa_get_data_for_url('country-activities/?format=json&limit=1' . $url_add );
   } else if ($type === 'homepage-total-budget'){
-    echo oipa_get_data_for_url('activity-aggregate-any/?format=json&group_by=reporting-org&aggregation_key=total-budget');
-  } else if ($type === 'homepage-major-programmes'){
+    echo oipa_get_data_for_url('activity-aggregate-any/?format=json&group_by=reporting-org&aggregation_key=total-budget&reporting_organisation__in=' . DEFAULT_ORGANISATION_ID);
+  } else if ($type === 'homepage-total-expenditure'){
+    echo oipa_get_data_for_url('activity-aggregate-any/?format=json&group_by=reporting-org&aggregation_key=expenditure&reporting_organisation__in=' . DEFAULT_ORGANISATION_ID);
+  }else if ($type === 'homepage-major-programmes'){
     echo oipa_get_data_for_url('sector-activities/?format=json&sectors__in=1,2,3,4,5');
   } else if ($type === 'region'){
     echo oipa_get_data_for_url('regions/' . $_REQUEST["region"] . '/?format=json');

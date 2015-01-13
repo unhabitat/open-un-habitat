@@ -14,3 +14,4 @@
    Oipa.default_organisation_name = "<?php echo DEFAULT_ORGANISATION_NAME; ?>";
 </script>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/oipa_unhabitat.js"></script>
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/countUp.js"></script>

@@ -17,7 +17,7 @@ BubbleChart = (function() {
     this.refresh_nodes = __bind(this.refresh_nodes, this);
     this.create_nodes = __bind(this.create_nodes, this);
     var max_amount;
-    this.data = data;
+    
     this.width = 800;
     this.height = 400;
     this.paddingleft = 320;
@@ -59,10 +59,16 @@ BubbleChart = (function() {
     this.force = null;
     this.circles = null;
     this.fill_color = d3.scale.ordinal().domain(["298", "798", "998", "89", "589", "489"]).range(["#006FA1", "#149CCB", "#1A5565", "#0AC7F3", "#76DBF6", "#3B82A1"]);
+    
+  }
+
+  BubbleChart.prototype.set_data = function(data){
+    this.data = data;
     max_amount = d3.max(this.data, function(d) {
       return parseInt(d.total_budget);
     });
     this.radius_scale = d3.scale.pow().exponent(0.5).domain([0, max_amount]).range([2, 20]);
+    
     this.create_nodes();
     this.create_vis();
   }
@@ -97,16 +103,16 @@ BubbleChart = (function() {
   BubbleChart.prototype.refresh = function() {
 
   	var that = this;
-	var parameters = get_activity_based_parameters_from_selection(Oipa.mainSelection);
-  	jQuery.ajax({
-		type: 'GET',
-		url: search_url + "activity-list-vis/?format=json" + parameters,
-		contentType: "application/json",
-		dataType: 'json',
-		success: function(data){
-			that.reset_radius(data);
-		}
-	});  	
+  	var parameters = get_activity_based_parameters_from_selection(Oipa.mainSelection);
+    	jQuery.ajax({
+  		type: 'GET',
+  		url: search_url + "activity-list-vis/?format=json" + parameters,
+  		contentType: "application/json",
+  		dataType: 'json',
+  		success: function(data){
+  			that.reset_radius(data);
+  		}
+  	});  	
   };
 
   BubbleChart.prototype.reset_radius = function(data) {
@@ -130,7 +136,6 @@ BubbleChart = (function() {
   	this.vis.selectAll("circle").data(this.nodes, function(d) {
       return d.id;
     });
-
 
   	function endall(transition, callback) { 
     var n = 0; 
@@ -199,7 +204,21 @@ BubbleChart = (function() {
       };
     })(this));
     this.force.start();
-    return this.hide_years();
+
+    if(load_scatter_plot){
+      $('.btn-visualisation').hide();
+      $('.scatter-plot-wrapper').show();
+      $('#map').hide();
+      $('.btn-map').show();  
+      this.display_by_year();
+      $("#vis").css("opacity", 1);
+      return true;
+    } else {
+      $('#map').show();
+      return this.hide_years();
+    }
+
+    
   };
 
   BubbleChart.prototype.move_towards_center = function(alpha) {
@@ -245,7 +264,7 @@ BubbleChart = (function() {
 
     var header, rect, groups, groups_data, groups_x;
     groups_x = {
-      "289": { "x": 65, "label" : "Africa"},
+      "298": { "x": 65, "label" : "Africa"},
       "798": { "x": 225, "label" : "Asia"},
       "998": { "x": 375, "label" : "Bilateral"},
       "89": { "x": 488, "label" : "Europe"},
@@ -262,7 +281,7 @@ BubbleChart = (function() {
     this.force.on("end", function(){ 
 
       Oipa.visualisations[0].group_aggregation = {
-        "289": {"count": 0, "x_sum": 0},
+        "298": {"count": 0, "x_sum": 0},
         "798": {"count": 0, "x_sum": 0},
         "998": {"count": 0, "x_sum": 0},
         "89": {"count": 0, "x_sum": 0},
@@ -271,8 +290,10 @@ BubbleChart = (function() {
       };
 
       that.circles.each(function(d){
-        Oipa.visualisations[0].group_aggregation[d.group]["count"] = Oipa.visualisations[0].group_aggregation[d.group]["count"] + 1;
-        Oipa.visualisations[0].group_aggregation[d.group]["x_sum"] = Oipa.visualisations[0].group_aggregation[d.group]["x_sum"] + d.x;
+        if (d.group in Oipa.visualisations[0].group_aggregation){ 
+          Oipa.visualisations[0].group_aggregation[d.group]["count"] = Oipa.visualisations[0].group_aggregation[d.group]["count"] + 1;
+          Oipa.visualisations[0].group_aggregation[d.group]["x_sum"] = Oipa.visualisations[0].group_aggregation[d.group]["x_sum"] + d.x;
+        }
       });
 
 
@@ -336,4 +357,18 @@ BubbleChart = (function() {
 })();
 
 root = typeof exports !== "undefined" && exports !== null ? exports : this;
+
+
+var scatter_plot = new BubbleChart(); 
+Oipa.visualisations.push(scatter_plot);
+
+$(function() {
+  render_vis = function(csv) {
+    scatter_plot.set_data(csv);
+    scatter_plot.start();
+    scatter_plot.display_group_all();
+  };
+
+  d3.json(search_url + "activity-list-vis/?format=json&reporting_organisation__in=41120", render_vis);
+});
 

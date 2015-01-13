@@ -2,83 +2,71 @@
 // LIST PAGES
 
 jQuery(".filter-save").click(function(){
-	Oipa.mainFilter.save();
-	if(projectlist !== null){
-		projectlist.offset = 0;
-		projectlist.refresh();
-	}
-	if(otherlist !== null){
-		otherlist.offset = 0;
-		otherlist.refresh();
-	}
+    Oipa.mainFilter.save();
+    if(projectlist !== null){
+        projectlist.offset = 0;
+        projectlist.refresh();
+    }
+    if(otherlist !== null){
+        otherlist.offset = 0;
+        otherlist.refresh();
+    }
 });
 
 jQuery(".filter-clear-all").click(function(e){
-	e.preventDefault();
-	Oipa.mainFilter.reset_filters();
+    e.preventDefault();
+    Oipa.mainFilter.reset_filters();
 });
 
 jQuery("#sort-by-budget").change(function(e){
-	e.preventDefault();
-	var val = jQuery(this).val();
-	if (val != "0"){
+    e.preventDefault();
+    var val = jQuery(this).val();
+    if (val != "0"){
 
-		if (typeof(projectlist) !== "undefined"){
-			projectlist.order_by = "total_budget";
-			projectlist.order_asc_desc = val;
-			projectlist.offset = 0;
-			projectlist.refresh();
-		} else {
-			otherlist.order_by = "total_budget";
-			otherlist.order_asc_desc = val;
-			otherlist.offset = 0;
-			otherlist.refresh();
-		}
-	}
+        if (typeof(projectlist) !== "undefined"){
+            projectlist.order_by = "total_budget";
+            projectlist.order_asc_desc = val;
+            projectlist.offset = 0;
+            projectlist.refresh();
+        } else {
+            otherlist.order_by = "total_budget";
+            otherlist.order_asc_desc = val;
+            otherlist.offset = 0;
+            otherlist.refresh();
+        }
+    }
 });
 
 jQuery("#sort-by-start-actual").change(function(e){
-	e.preventDefault();
-	var val = jQuery(this).val();
-	if (val != "0"){
+    e.preventDefault();
+    var val = jQuery(this).val();
+    if (val != "0"){
 
-		if (typeof(projectlist) !== "undefined"){
-			projectlist.order_by = "start_planned";
-			projectlist.order_asc_desc = val;
-			projectlist.offset = 0;
-			projectlist.refresh();
-		} else {
-			otherlist.order_by = "start_planned";
-			otherlist.order_asc_desc = val;
-			otherlist.offset = 0;
-			otherlist.refresh();
-		}
-	}
+        if (typeof(projectlist) !== "undefined"){
+            projectlist.order_by = "start_planned";
+            projectlist.order_asc_desc = val;
+            projectlist.offset = 0;
+            projectlist.refresh();
+        } else {
+            otherlist.order_by = "start_planned";
+            otherlist.order_asc_desc = val;
+            otherlist.offset = 0;
+            otherlist.refresh();
+        }
+    }
 });
-
-
-
 
 
 
 // PROJECT DETAIL PAGE
 
 jQuery(".btn-download-data").click(function(e){
-	e.preventDefault();
-	var format = jQuery(this).data("format");
-	var project = new OipaProject();
-	project.id = jQuery(this).data("id");
-	project.export(format);
+    e.preventDefault();
+    var format = jQuery(this).data("format");
+    var project = new OipaProject();
+    project.id = jQuery(this).data("id");
+    project.export(format);
 });
-
-
-
-
-
-
-
-
-
 
 
 
@@ -104,118 +92,114 @@ $( "select.selectpickr" ).change(function() {
 
 /* Slide-out search box on the top */
 $(document).ready(function(){
-	var submitIcon = $('.searchbox-icon');
-	var inputBox = $('.searchbox-input');
-	var searchBox = $('.searchbox');
-	var isOpen = false;
-	submitIcon.click(function(){
-		if(isOpen == false){
-			searchBox.addClass('searchbox-open');
-			inputBox.focus();
-			isOpen = true;
-		} else {
-			searchBox.removeClass('searchbox-open');
-			inputBox.focusout();
-			isOpen = false;
-		}
-	});  
-	 submitIcon.mouseup(function(){
-		return false;
-	});
-	searchBox.mouseup(function(){
-		return false;
-	});
-	$(document).mouseup(function(){
-		if(isOpen == true){
-			$('.searchbox-icon').css('display','block');
-			submitIcon.click();
-		}
-	});
+    var submitIcon = $('.searchbox-icon');
+    var inputBox = $('.searchbox-input');
+    var searchBox = $('.searchbox');
+    var isOpen = false;
+    submitIcon.click(function(){
+        if(isOpen == false){
+            searchBox.addClass('searchbox-open');
+            inputBox.focus();
+            isOpen = true;
+        } else {
+            searchBox.removeClass('searchbox-open');
+            inputBox.focusout();
+            isOpen = false;
+        }
+    });  
+     submitIcon.mouseup(function(){
+        return false;
+    });
+    searchBox.mouseup(function(){
+        return false;
+    });
+    $(document).mouseup(function(){
+        if(isOpen == true){
+            $('.searchbox-icon').css('display','block');
+            submitIcon.click();
+        }
+    });
 
+    // Handler for .ready() called.
 
+    function load_visualisation_wrapper(vis_div){
+        $('.project-vis-wrapper').hide();
+        if(vis_div == "#map"){
+            $('.btn-map').hide();
+            $('.btn-visualisation').show();
+        } else {
+            $('.btn-visualisation').hide();
+            $('.btn-map').show();
+        }
+        $(vis_div).show();
+    }
 
-
-
-  	// Handler for .ready() called.
-
-   function load_visualisation_wrapper(vis_div){
-      $('.project-vis-wrapper').hide();
-      if(vis_div == "#map"){
-         $('.btn-map').hide();
-         $('.btn-visualisation').show();
-      } else {
-         $('.btn-visualisation').hide();
-         $('.btn-map').show();
-      }
-      $(vis_div).show();
-   }
-
-   $('.bar-chart').click(function(e) {
-   	e.preventDefault();
-      load_visualisation_wrapper(".bar-chart-wrapper");
-   });
+    $('.bar-chart').click(function(e) {
+        e.preventDefault();
+        load_visualisation_wrapper(".bar-chart-wrapper");
+    });
    
-   $('.scatter-plot').click(function(e) {
-   	  e.preventDefault();
-      load_visualisation_wrapper(".scatter-plot-wrapper");
-      toggle_view("year");
-   });
+    $('.scatter-plot').click(function(e) {
+        e.preventDefault();
+        load_visualisation_wrapper(".scatter-plot-wrapper");
+        scatter_plot.display_by_year();
+    });
    
-   $('.circle-package').click(function(e) {
-   	e.preventDefault();
-    load_visualisation_wrapper(".circle-package-wrapper");
-   });
+    $('.circle-package').click(function(e) {
+        e.preventDefault();
+        load_visualisation_wrapper(".circle-package-wrapper");
+    });
    
-   $('.btn-map').hide();
-   
+    $('.btn-map').hide();
+
     $('.btn-visualisation').click(function(e) {
-    	e.preventDefault();
-      load_visualisation_wrapper(".scatter-plot-wrapper");
-      toggle_view("year");
-   });
+        e.preventDefault();
+        load_visualisation_wrapper(".scatter-plot-wrapper");
+        scatter_plot.display_by_year();
+        $("#vis").css("opacity", 1);
+    });
    
     $('.btn-map').click(function(e) {
-    	e.preventDefault();
-    	load_visualisation_wrapper("#map");
-   });
-
-
-
+        e.preventDefault();
+        load_visualisation_wrapper("#map");
+    });
 
     $('#back-to-results').click(function(e){
-    	e.preventDefault();
-    	var lastpage = cookie.get('lastpage');
+        e.preventDefault();
+        var lastpage = cookie.get('lastpage');
 
-    	if (lastpage != undefined){
-    		window.location.href = lastpage;
-    	} else {
-    		window.location.href = site_url + "/projects/";
-    	}
-    	console.log(lastpage);
-
+        if (lastpage != undefined){
+            window.location.href = lastpage;
+        } else {
+            window.location.href = site_url + "/projects/";
+        }
     });
 
     $('#project-list-wrapper a, .map a, #grouped-list-wrapper a').click(function(e){
-    	var encoded_url = encodeURI(window.location.href);
-    	cookie.set('lastpage', encoded_url, {
-		   expires: 7, 
-		   path: "/"
-		});
-    	window.location.href = $(this).attr('href');
+        var encoded_url = encodeURI(window.location.href);
+        cookie.set('lastpage', encoded_url, {
+           expires: 7, 
+           path: "/"
+        });
+        window.location.href = $(this).attr('href');
     });
-
-
 
 });
 
 function buttonUp(){
-	var inputVal = $('.searchbox-input').val();
-	inputVal = $.trim(inputVal).length;
-	if( inputVal !== 0){
-		$('.searchbox-icon').css('display','none');
-	} else {
-		$('.searchbox-input').val('');
-		$('.searchbox-icon').css('display','block');
-	}
+    var inputVal = $('.searchbox-input').val();
+    inputVal = $.trim(inputVal).length;
+    if( inputVal !== 0){
+        $('.searchbox-icon').css('display','none');
+    } else {
+        $('.searchbox-input').val('');
+        $('.searchbox-icon').css('display','block');
+    }
 }
+
+
+$(function(){
+    $(".map-menu").show();
+    $(".project-vis-wrapper").css("opacity", 1);
+});
 
