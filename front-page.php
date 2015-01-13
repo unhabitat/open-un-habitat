@@ -30,6 +30,73 @@
    <div class="spacer"></div>
 </div>
 
+
+
+<div class="container">
+   <div id="carousel-homepage" class="carousel slide" data-ride="carousel">
+      <div class="carousel-header"><strong>UN-HABITAT</strong> - Open data IATI visualization 
+         <!-- Indicators -->
+         <ol class="carousel-indicators">
+                     
+            <?php 
+               $args = array( 'post_type' => 'bs_slider' );
+               $the_query = new WP_Query( $args ); 
+               if ( $the_query->have_posts() ) {
+                   $first = true;
+                   $n = 0;
+                   while ( $the_query->have_posts() ) {
+                       $the_query->the_post(); 
+            ?>
+      
+            <li data-target="#carousel-homepage" data-slide-to="<?php echo $n ?>"<?php if($first) echo ' class="active"'; ?>></li>
+
+            <?php 
+                  $first = false;
+                  $n++;
+               } // while
+               wp_reset_postdata();
+            ?>
+            
+            <?php } // end if have posts ?>
+            
+         </ol>
+      </div>
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+      
+      <?php 
+         $args = array( 'post_type' => 'bs_slider' );
+         $the_query = new WP_Query( $args ); 
+         if ( $the_query->have_posts() ) {
+             $first = true;
+             while ( $the_query->have_posts() ) {
+                 $the_query->the_post(); 
+      ?>
+      
+               <div class="item<?php if($first) echo ' active'; ?>">
+                  <div class="col-md-4">
+                     <h1 class="carousel-title"><?php the_title(); ?></h1>
+                     <?php the_content(); ?> 
+                  </div>
+                  <div class="col-md-8"><?php the_post_thumbnail( 'full', array( 'class' => 'img-responsive' ) );?></div>
+               </div>
+      
+      <?php 
+            $first = false;
+         } // while
+         wp_reset_postdata();
+      ?>
+      
+      <?php } else { ?>
+         <p><?php _e( 'No slides found. Please insert some slides', 'unhabitat' ); ?></p>
+      <?php } // end if have posts ?>
+
+      </div>
+   </div>
+</div>
+
+
+<?php /* ?>
 <div class="container">
    <div id="carousel-homepage">
       <div class="carousel-header">&nbsp;</div>
@@ -52,7 +119,7 @@
       </div>
     </div>   
 </div>
-
+<?php */ ?>
 
 <div class="container">
    <?php 
