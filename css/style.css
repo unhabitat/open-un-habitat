@@ -264,7 +264,7 @@ a.btn-visualisation:hover, a.btn-map:hover {
 h1.carousel-title {
    font-size: 30px;
    color: #2581d4;
-   font-weight: 600;
+   font-weight: bold;
    margin-top: 0px;
 }
 .carousel-inner .legend {
@@ -661,6 +661,12 @@ span.sector {
    border-left: 1px solid #00425F;
    color: #0070A1;
 }
+
+.hp-total-wrapper .table td{
+   border-left: 0;
+   border-top: 0;
+}
+
 td:first-child {
    border-left: none;
 }
@@ -1405,31 +1411,42 @@ footer {
 .hp-total-wrapper{
    background-color: #fff;
    padding: 1em 2em 1em;
-   margin: 1.7em 1.7em 0;
+   margin: 0em 1.7em 0.5em;
    background-image: url('../img/noise.png');
    -moz-box-shadow: 2px 2px 6px #aaa;
    -webkit-box-shadow: 2px 2px 6px #aaa;
    box-shadow: 2px 2px 6px #aaa;
 }
 
-.hp-total-wrapper-left{
-   margin-right: 0;
+.hp-total-wrapper table td{
+   font-size: 12px;
+   font-weight: bold;
+   color: #3789D4;
 }
 
-.hp-total-wrapper-right{
-   margin-left: 0;
+#hp-sector-pie-chart, #hp-country-pie-chart, #hp-donor-pie-chart{
+   margin-top: 20px; 
 }
+
+.hp-table-title{
+   color: #00415F;
+   font-size: 18px;
+   font-weight: bold;
+   padding-top: 0.3em;
+   padding-bottom: 0.8em;
+}
+
 
 .hp-total-wrapper h2{
    color: #00415F;
    margin-top: 0.2em;
    margin-bottom: 0;
+   font-weight: bold;
 }
 
 .hp-total-wrapper hr{
    margin-top: 5px;
    margin-bottom: 10px;
-   margin-right: 2em;
 }
 
 .hp-total-wrapper span{
@@ -1440,4 +1457,36 @@ footer {
    font-weight: bold;
    font-size: 44px;
    color: #2083DC;
+}
+
+.hp-table-value{
+   min-width: 120px;
+}
+
+.chartjs-tooltip-header{
+   background-color: #00425F;
+   color: #fff;
+   padding: 10px;
+   font-weight: bold;
+}
+
+.chartjs-tooltip-value{
+   color: #3789D4;
+   padding: 10px;
+   font-size: 12px;
+}
+
+#chartjs-tooltip, #chartjs-tooltip-1, #chartjs-tooltip-2 {
+   z-index: 99;
+   width: 180px;
+   opacity: 1;
+   position: absolute;
+   background: #fff;
+   color: white;
+   padding: 0px;
+   -webkit-transition: all .1s ease;
+   transition: all .1s ease;
+   pointer-events: none;
+   -webkit-transform: translate(-50%, 0);
+   transform: translate(-50%, 0);
 }

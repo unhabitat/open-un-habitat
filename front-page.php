@@ -33,7 +33,7 @@
 
 
 <div class="container">
-   <div id="carousel-homepage" class="carousel slide" data-ride="carousel">
+   <div id="carousel-homepage" class="carousel slide" data-ride="carousel" data-interval="10000">
       <div class="carousel-header"><strong>UN-HABITAT</strong> - Open data IATI visualization 
          <!-- Indicators -->
          <ol class="carousel-indicators">
@@ -65,61 +65,177 @@
       <div class="carousel-inner">
       
       <?php 
-         $args = array( 'post_type' => 'bs_slider' );
+         $args = array( 'post_type' => 'bs_slider', 'posts_per_page' => 1, 'offset' => 0 );
          $the_query = new WP_Query( $args ); 
          if ( $the_query->have_posts() ) {
-             $first = true;
              while ( $the_query->have_posts() ) {
                  $the_query->the_post(); 
       ?>
       
-               <div class="item<?php if($first) echo ' active'; ?>">
-                  <div class="col-md-4">
-                     <h1 class="carousel-title"><?php the_title(); ?></h1>
-                     <?php the_content(); ?> 
-                  </div>
-                  <div class="col-md-8"><?php the_post_thumbnail( 'full', array( 'class' => 'img-responsive' ) );?></div>
-               </div>
+       <div class="item active">
+          <div class="col-md-4">
+             <h1 class="carousel-title"><?php the_title(); ?></h1>
+             <?php the_content(); ?> 
+          </div>
+          <div class="col-md-8">
+            <div id="hp-sector-slide" class="hp-total-wrapper">
+              <h2>Expenditure per sector</h2>
+              <hr>
+              <div class="row">
+                <div class="col-md-4">
+                  <canvas id="hp-sector-pie-chart" width="183" height="183"></canvas>
+                  <div id="chartjs-tooltip"></div>
+                </div>
+                <div class="col-md-8">
+                  <div class="hp-table-title"> Top 5 expenditures</div>
+                  <table class="table table-striped">
+                    <tbody>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+       </div>
       
       <?php 
-            $first = false;
          } // while
-         wp_reset_postdata();
+        } 
+        wp_reset_postdata();
+
+
+
+         $args = array( 'post_type' => 'bs_slider', 'posts_per_page' => 1, 'offset' => 1 );
+         $the_query = new WP_Query( $args ); 
+         if ( $the_query->have_posts() ) {
+             while ( $the_query->have_posts() ) {
+                 $the_query->the_post(); 
       ?>
       
-      <?php } else { ?>
-         <p><?php _e( 'No slides found. Please insert some slides', 'unhabitat' ); ?></p>
-      <?php } // end if have posts ?>
+       <div class="item">
+          <div class="col-md-4">
+             <h1 class="carousel-title"><?php the_title(); ?></h1>
+             <?php the_content(); ?> 
+          </div>
+          <div class="col-md-8">
+            <div id="hp-country-slide" class="hp-total-wrapper">
+              <h2>Activities per country</h2>
+              <hr>
+              <div class="row">
+                <div class="col-md-4">
+                  <canvas id="hp-country-pie-chart" width="183" height="183"></canvas>
+                  <div id="chartjs-tooltip-1"></div>
+                </div>
+                <div class="col-md-8">
+                  <div class="hp-table-title"> Top 5 countries by activity</div>
+                  <table class="table table-striped">
+                    <tbody>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+       </div>
+      
+      <?php 
+         } // while
+        } 
+        wp_reset_postdata(); 
+
+
+
+
+         $args = array( 'post_type' => 'bs_slider', 'posts_per_page' => 1, 'offset' => 2 );
+         $the_query = new WP_Query( $args ); 
+         if ( $the_query->have_posts() ) {
+             while ( $the_query->have_posts() ) {
+                 $the_query->the_post(); 
+      ?>
+      
+       <div class="item">
+          <div class="col-md-4">
+             <h1 class="carousel-title"><?php the_title(); ?></h1>
+             <?php the_content(); ?> 
+          </div>
+          <div class="col-md-8">
+            <div id="hp-donor-slide" class="hp-total-wrapper">
+              <h2>Budget per donor</h2>
+              <hr>
+              <div class="row">
+                <div class="col-md-4">
+                  <canvas id="hp-donor-pie-chart" width="183" height="183"></canvas>
+                  <div id="chartjs-tooltip-2"></div>
+                </div>
+                <div class="col-md-8">
+                  <div class="hp-table-title"> Top 5 donors by budget</div>
+                  <table class="table table-striped">
+                    <tbody>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+       </div>
+      
+      <?php 
+         } // while
+        } 
+        wp_reset_postdata(); ?>
+
 
       </div>
    </div>
 </div>
-
-
-<?php /* ?>
-<div class="container">
-   <div id="carousel-homepage">
-      <div class="carousel-header">&nbsp;</div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="hp-total-wrapper hp-total-wrapper-left">
-            <h2>Total expenditures activities</h2>
-            <hr>
-            <div class="hp-total-value">US$ <span id="total-expenditures">000,000,000</span></div>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="hp-total-wrapper hp-total-wrapper-right">
-            <h2>Total budget activities</h2>
-            <hr>
-            <div class="hp-total-value">US$ <span id="total-budget">000,000,000</span></div>
-          </div>
-        </div>
-      </div>
-    </div>   
-</div>
-<?php */ ?>
 
 <div class="container">
    <?php 
@@ -145,8 +261,6 @@ wp_reset_postdata();
 
    var stats = new OipaMainStats();
    stats.get_total_projects();
-   stats.get_total_budget();
-   stats.get_total_expenditure();
 
 </script>
 
@@ -158,20 +272,12 @@ if (Math.random() > 0.5){
 }
 </script>
 
-<script>
-
-
-
-</script>
-
-
 <script defer src="<?php echo get_stylesheet_directory_uri(); ?>/js/plugins.js"></script>
 <script defer src="<?php echo get_stylesheet_directory_uri(); ?>/js/script.js"></script>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/CustomTooltip.js"></script>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/libs/d3.js"></script>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/bubblechart.js"></script>
-
-
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/FrontPageCharts.js"></script>
 
 
 
