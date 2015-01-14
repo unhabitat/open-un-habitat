@@ -25,8 +25,9 @@
       ?>
       
       <div class="disclaimer">
-         <p> Open UN-Habitat Transparency Initiative. Back to <a href="<?php bloginfo('url'); ?>">main website</a> of UN-Habitat<br>
-            Content licensed under a Creative Commons Attribution 3.0 Unported License </p>
+
+         <?php  dynamic_sidebar( 'openunh-footer' ); ?>
+
       </div>
       <div class="footer-logo"><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/un-habitat-logo-footer.png" width="376" height="68" class="img-responsive" alt="UN-Habitat Logo"/></div>
    </div>

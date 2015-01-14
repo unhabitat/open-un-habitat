@@ -231,6 +231,16 @@ function add_rewrite_rules( $wp_rewrite )
 add_action('generate_rewrite_rules', 'add_rewrite_rules');
 
 
-
+$footer_sidebar_args = array(
+  'name'          => __( 'Footer sidebar', 'unhabitat' ),
+  'id'            => 'openunh-footer',
+  'description'   => '',
+  'class'         => '',
+  'before_widget' => '',
+  'after_widget'  => '',
+  'before_title'  => '',
+  'after_title'   => '' 
+); 
+ register_sidebar( $footer_sidebar_args );
 
 ?>
