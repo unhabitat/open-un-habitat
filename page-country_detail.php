@@ -24,7 +24,7 @@ $country_info = $country_info->objects[0];
 <?php require('incl/pager.php'); ?>
 <div class="container country-detail">
    <div class="col-md-12 country-title">
-      <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/64x42/<?php echo $country_id; ?>.png" width="64" height="42" />
+      <?php /* <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/64x42/<?php echo $country_id; ?>.png" width="64" height="42" /> */ ?>
       <h1><?php if(isset($country_info->name)){ echo $country_info->name; } ?></h1>
       <!-- <p></p> -->
    </div>
@@ -87,7 +87,6 @@ $country_info = $country_info->objects[0];
    projectlist.init();
    Oipa.lists.push(projectlist);
 
-   map.refresh();
    
 
 

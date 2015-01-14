@@ -3,7 +3,7 @@
 <div class="container">
    <div class="map">
       <div class="map-menu">
-         <p class="map-results">Results  <span id="project-list-amount"></span> of <span id="total-project-amount"></span> activities</p>
+         <p class="map-results" style="text-align: center;"> <span id="total-project-amount"></span> activities</p>
          <!-- <a href="#" class="map-btn bar-chart">Bar Chart</a> 
          <a href="#" class="map-btn scatter-plot">Scatter Plot</a> 
          <a href="#" class="map-btn circle-package">Circle Package</a>  -->
@@ -33,7 +33,7 @@
 
 
 <div class="container">
-   <div id="carousel-homepage" class="carousel slide" data-ride="carousel" data-interval="10000">
+   <div id="carousel-homepage" class="carousel slide" data-ride="carousel" data-interval="7000">
       <div class="carousel-header"><strong>UN-HABITAT</strong> - Open data IATI visualization 
          <!-- Indicators -->
          <ol class="carousel-indicators">
@@ -82,10 +82,7 @@
               <h2>Expenditure per sector</h2>
               <hr>
               <div class="row">
-                <div class="col-md-4">
-                  <canvas id="hp-sector-pie-chart" width="183" height="183"></canvas>
-                  <div id="chartjs-tooltip"></div>
-                </div>
+                
                 <div class="col-md-8">
                   <div class="hp-table-title"> Top 5 expenditures</div>
                   <table class="table table-striped">
@@ -108,6 +105,11 @@
                       </tr>
                     </tbody>
                   </table>
+                </div>
+
+                <div class="col-md-4">
+                  <canvas id="hp-sector-pie-chart" width="183" height="183"></canvas>
+                  <div id="chartjs-tooltip"></div>
                 </div>
               </div>
             </div>
@@ -138,10 +140,6 @@
               <h2>Activities per country</h2>
               <hr>
               <div class="row">
-                <div class="col-md-4">
-                  <canvas id="hp-country-pie-chart" width="183" height="183"></canvas>
-                  <div id="chartjs-tooltip-1"></div>
-                </div>
                 <div class="col-md-8">
                   <div class="hp-table-title"> Top 5 countries by activity</div>
                   <table class="table table-striped">
@@ -164,6 +162,10 @@
                       </tr>
                     </tbody>
                   </table>
+                </div>
+                <div class="col-md-4">
+                  <canvas id="hp-country-pie-chart" width="183" height="183"></canvas>
+                  <div id="chartjs-tooltip-1"></div>
                 </div>
               </div>
             </div>
@@ -195,10 +197,6 @@
               <h2>Budget per donor</h2>
               <hr>
               <div class="row">
-                <div class="col-md-4">
-                  <canvas id="hp-donor-pie-chart" width="183" height="183"></canvas>
-                  <div id="chartjs-tooltip-2"></div>
-                </div>
                 <div class="col-md-8">
                   <div class="hp-table-title"> Top 5 donors by budget</div>
                   <table class="table table-striped">
@@ -221,6 +219,10 @@
                       </tr>
                     </tbody>
                   </table>
+                </div>
+                <div class="col-md-4">
+                  <canvas id="hp-donor-pie-chart" width="183" height="183"></canvas>
+                  <div id="chartjs-tooltip-2"></div>
                 </div>
               </div>
             </div>

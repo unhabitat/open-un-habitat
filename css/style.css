@@ -893,6 +893,10 @@ ul.navbar-nav {
    position: relative;
 }
 
+.hp-total-wrapper canvas{
+   display: none;
+}
+
 }
 
 /* Extra Small Devices, Phones */ 
@@ -1371,7 +1375,7 @@ footer {
 .country-title h1{
    vertical-align: bottom;
    margin-bottom: -5px;
-   margin-left: 9px;
+   margin-left: 0px;
 }
 
 #country-page-filters #sectors-filter-wrapper, #country-page-filters #budgets-filter-wrapper, #donor-filters #sectors-filter-wrapper, #donor-filters #budgets-filter-wrapper{
@@ -1418,14 +1422,14 @@ footer {
    box-shadow: 2px 2px 6px #aaa;
 }
 
+.hp-total-wrapper canvas{
+   margin-top: 44px;
+}
+
 .hp-total-wrapper table td{
    font-size: 12px;
    font-weight: bold;
    color: #3789D4;
-}
-
-#hp-sector-pie-chart, #hp-country-pie-chart, #hp-donor-pie-chart{
-   margin-top: 20px; 
 }
 
 .hp-table-title{
@@ -1436,6 +1440,9 @@ footer {
    padding-bottom: 0.8em;
 }
 
+.hp-table-nr{
+   max-width: 18px;
+}
 
 .hp-total-wrapper h2{
    color: #00415F;

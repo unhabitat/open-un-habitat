@@ -142,17 +142,13 @@ SectorPieChart.prototype.get_sector_data = function(){
 
 SectorPieChart.prototype.load_chart = function(){
     
-    // format the data
     formatted_data = this.format_data();
 
-
-sorted_formatted_data = this.sort_formatted_data_by_value(formatted_data);
+    sorted_formatted_data = this.sort_formatted_data_by_value(formatted_data);
 
     // init the chart
     this.init(formatted_data);
     
-    
-
     this.load_table(sorted_formatted_data);
 }
 
@@ -176,7 +172,8 @@ SectorPieChart.prototype.load_table = function(data){
     var html = "";
 
     for(var i = 0;i < 5;i++){
-        html += "<tr><td>"+(i+1)+". </td><td>"+data[i].label+"</td><td class='hp-table-value'>US$ "+comma_formatted(data[i].value)+"</td></tr>";
+        html += "<tr><td class='hp-table-nr'>"+(i+1)+". </td><td>"+data[i].label+"</td>";
+        html += "<td class='hp-table-value'>US$ "+comma_formatted(data[i].value)+"</td></tr>";
     }
 
     $("#hp-sector-slide table tbody").html(html);
@@ -310,6 +307,29 @@ CountryPieChart.prototype.init = function(data){
     this.chart = new Chart(ctx).Doughnut(data,options);
 }
 
+CountryPieChart.prototype.load_listeners = function(){
+    $("#" + this.id).click( 
+        function(evt){
+            var activePoints = cpc.chart.getSegmentsAtEvent(evt); 
+            if(activePoints.length > 0){
+                var clicked_name = activePoints[0].label;
+                var clicked_id = null;
+
+                for(var i = 0;i < cpc.aggregation_data.objects.length;i++){
+                    if (cpc.aggregation_data.objects[i].name == clicked_name){
+                        clicked_id = cpc.aggregation_data.objects[i].id;
+                        break;
+                    }
+                }
+
+                var url = site_url + "/country/" + clicked_id + "/";
+
+                window.location = url;
+            }
+        }
+    ); 
+}
+
 
 CountryPieChart.prototype.search_sector = function(sector_id){
      
@@ -321,18 +341,16 @@ CountryPieChart.prototype.search_sector = function(sector_id){
 }
 
 CountryPieChart.prototype.format_data = function(){
+
     var data = [];
 
     for (var i = 0; i < this.aggregation_data.objects.length;i++){
-
-        var value = this.aggregation_data.objects[i].total_projects;
-        var label = this.aggregation_data.objects[i].name;
-
         data.push({
-            value: value,
+            id: this.aggregation_data.objects[i].id,
+            value: this.aggregation_data.objects[i].total_projects,
             color: randomColor(),
             highlight: "#FFC870",
-            label: label
+            label: this.aggregation_data.objects[i].name
         });
     }
 
@@ -351,6 +369,8 @@ CountryPieChart.prototype.load_chart = function(){
     this.init(formatted_data);
 
     this.load_table(sorted_formatted_data);
+
+    this.load_listeners();
 }
 
 CountryPieChart.prototype.sort_formatted_data_by_value = function(data){
@@ -369,11 +389,12 @@ CountryPieChart.prototype.sort_formatted_data_by_value = function(data){
 } 
 
 CountryPieChart.prototype.load_table = function(data){
-    
-    var html = "";
 
+    var html = "";
     for(var i = 0;i < 5;i++){
-        html += "<tr><td>"+(i+1)+". </td><td>"+data[i].label+"</td><td class='hp-table-value'>"+data[i].value+" activities</td></tr>";
+        html += "<tr><td class='hp-table-nr'>"+(i+1)+". </td>";
+        html += "<td><a href='"+site_url+"/country/"+data[i].id+"/'>"+data[i].label+"</a></td>";
+        html += "<td class='hp-table-value'><a href='"+site_url+"/country/"+data[i].id+"/'>"+data[i].value+" activities</a></td></tr>";
     }
 
     $("#hp-country-slide table tbody").html(html);
@@ -490,6 +511,28 @@ DonorPieChart.prototype.init = function(data){
     this.chart = new Chart(ctx).Doughnut(data,options);
 }
 
+DonorPieChart.prototype.load_listeners = function(){
+    $("#" + this.id).click( 
+        function(evt){
+            var activePoints = dpc.chart.getSegmentsAtEvent(evt); 
+            if(activePoints.length > 0){
+                var clicked_name = activePoints[0].label;
+                var clicked_id = null;
+
+                for(var i = 0;i < dpc.aggregation_data.objects.length;i++){
+                    if (dpc.aggregation_data.objects[i].name == clicked_name){
+                        clicked_id = dpc.aggregation_data.objects[i].id;
+                        break;
+                    }
+                }
+
+                var url = site_url + "/donor/" + clicked_id + "/";
+
+                window.location = url;
+            }
+        }
+    ); 
+}
 
 DonorPieChart.prototype.search_sector = function(sector_id){
      
@@ -505,14 +548,12 @@ DonorPieChart.prototype.format_data = function(){
 
     for (var i = 0; i < this.aggregation_data.objects.length;i++){
 
-        var value = this.aggregation_data.objects[i].total_budget;
-        var label = this.aggregation_data.objects[i].name;
-
         data.push({
-            value: value,
+            id: this.aggregation_data.objects[i].id,
+            value: this.aggregation_data.objects[i].total_budget,
             color: randomColor(),
             highlight: "#FFC870",
-            label: label
+            label: this.aggregation_data.objects[i].name
         });
     }
 
@@ -530,6 +571,8 @@ DonorPieChart.prototype.load_chart = function(){
     this.init(formatted_data);
 
     this.load_table(sorted_formatted_data);
+
+    this.load_listeners();
 }
 
 DonorPieChart.prototype.sort_formatted_data_by_value = function(data){
@@ -552,7 +595,9 @@ DonorPieChart.prototype.load_table = function(data){
     var html = "";
 
     for(var i = 0;i < 5;i++){
-        html += "<tr><td>"+(i+1)+". </td><td>"+data[i].label+"</td><td class='hp-table-value'>US$ "+comma_formatted(data[i].value)+"</td></tr>";
+        html += "<tr><td class='hp-table-nr'>"+(i+1)+". </td>";
+        html += "<td><a href='"+site_url+"/donor/"+data[i].id+"/'>"+data[i].label+"</a></td>";
+        html += "<td class='hp-table-value'><a href='"+site_url+"/donor/"+data[i].id+"/'>US$ "+comma_formatted(data[i].value)+"</a></td></tr>";
     }
 
     $("#hp-donor-slide table tbody").html(html);
@@ -576,3 +621,6 @@ DonorPieChart.prototype.get_aggregation_data = function(){
 
 var dpc = new DonorPieChart();
 dpc.get_aggregation_data();
+
+
+ 
