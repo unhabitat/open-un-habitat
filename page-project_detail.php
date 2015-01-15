@@ -17,8 +17,6 @@ if (isset($_GET['id'])){
 
 $activity = oipa_get_activity($id);
 
-var_dump($activity->regions);
-
 require('incl/pager.php'); 
 
 ?>
