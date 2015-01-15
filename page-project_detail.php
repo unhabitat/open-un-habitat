@@ -413,7 +413,7 @@ $_REQUEST['sectors__in'] = $sector_codes;
             }
          }
          if (!empty($exact_locs)){
-            echo "map.show_project_detail_locations('exact_location', '" . implode(",", $exact_locs) . "');";
+            echo "map.show_project_detail_locations('exact_location', '" . json_encode($exact_locs) . "');";
          } else {
 
 

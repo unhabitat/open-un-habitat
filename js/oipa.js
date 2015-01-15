@@ -760,7 +760,17 @@ function OipaMap(){
 
 	this.show_project_detail_locations = function(administrative_level, terms){
 
-		if(administrative_level == "locations"){
+		if(administrative_level == "exact_location"){
+
+
+			json_terms = JSON.parse(terms);
+
+			for (var i = 0; i < json_terms.length;i++){
+				var marker = L.marker([json_terms[i].latitude, json_terms[i].longitude]).addTo(this.map);
+				
+			}
+			this.map.setView([json_terms[0].latitude,json_terms[0].longitude], 1);
+
 			// show exact location markers if exact location
 			// show polygon (if available) if its an adm1 region
 
