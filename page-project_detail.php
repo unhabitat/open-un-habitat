@@ -17,11 +17,11 @@ if (isset($_GET['id'])){
 
 $activity = oipa_get_activity($id);
 
+var_dump($activity->regions);
 
 require('incl/pager.php'); 
 
 ?>
-
 
 <div class="container project-detail">
    <div class="col-md-9 col-md-push-3">
@@ -402,19 +402,40 @@ $_REQUEST['sectors__in'] = $sector_codes;
 
 
 
-      if (!empty($activity->locations)) { 
+      function add_iati_locations_to_map($activity){
+         $exact_locs = array();
+         for($i = 0;$i < count($activity->locations);$i++){
+            // show regions on map
+            if (!empty($activity->locations[$i]->latitude) && !empty($activity->locations[$i]->longitude)){
+               array_push($exact_locs, array(
+                  "name" => $activity->locations[$i]->name,
+                  "latitude" => $activity->locations[$i]->latitude,
+                  "longitude" => $activity->locations[$i]->longitude
+               ));
+            }
+         }
+         if (!empty($exact_locs)){
+            echo "map.show_project_detail_locations('exact_location', '" . implode(",", $exact_locs) . "');";
+         } else {
 
 
-      } else if (!empty($activity->countries)) { 
+            $activity->locations = null;
+            load_geo_to_map($activity);
+         }
+         
+      }
+
+
+      function add_countries_to_map($activity){
          $loc_countries = array();
          for($i = 0;$i < count($activity->countries);$i++){
             // show regions on map
             array_push($loc_countries, $activity->countries[$i]->code);
          }
          echo "map.show_project_detail_locations('countries', '" . implode(",", $loc_countries) . "');";
+      }
 
-      } else if (!empty($activity->regions)) {
-
+      function add_regions_to_map($activity){
          $loc_regions = array();
          for($i = 0;$i < count($activity->regions);$i++){
             // show regions on map
@@ -422,14 +443,31 @@ $_REQUEST['sectors__in'] = $sector_codes;
          }
          echo "map.show_project_detail_locations('regions', '" . implode(",", $loc_regions) . "');";
       }
+
+      function load_geo_to_map($activity){
+         if (!empty($activity->locations)) { 
+            add_iati_locations_to_map($activity);
+
+         } else if (!empty($activity->countries)) { 
+            add_countries_to_map($activity);
+
+         } else if (!empty($activity->regions)) {
+            add_regions_to_map($activity);
+         }
+      }
+
+      load_geo_to_map($activity);
+
+      
+
       ?>
 
 
-
-
    });
-
 </script>
+
+   
+
 
 
 <?php get_footer(); ?>

@@ -712,10 +712,10 @@ function OipaMap(){
 		    var url_parameters = "todo";
 		    url_parameters = url_parameters.replace("?", "&");
 
-		    var popup_html = "<div class='leaflet-popup-wrapper'>"
-    		popup_html += "<div class='leaflet-popup-title'><a href='"+home_url+"/country/"+layer.feature.id+"/'>" + layer.feature.properties.name + "</a></div>"
+		    var popup_html = "<a href='"+home_url+"/country/"+layer.feature.id+"/'><div class='leaflet-popup-wrapper'>"
+    		popup_html += "<div class='leaflet-popup-title'>" + layer.feature.properties.name + "</div>"
     		popup_html += "<div class='leaflet-popup-budget-wrapper'>Total projects: <span>" + layer.feature.properties.project_amount + "</span></div>"
-    		popup_html += "</div></div>"
+    		popup_html += "</div></div></a>"
 
     		// .setContent('<div id="map-tip-header">' + layer.feature.properties.name + '</div><div id="map-tip-text">Total projects: '+ layer.feature.properties.project_amount + '</div><div id="map-tip-link"><a href="'+home_url+'/country/'+layer.feature.id+'/">View country</a></div>')
 
@@ -830,6 +830,7 @@ function OipaMap(){
 						if(data.center_longlat){
 							var center_longlat = geo_point_to_latlng(data.center_longlat);
 							var marker = L.marker(center_longlat).addTo(self.map);
+							self.map.setView(center_longlat, 1);
 						}
 					}
 				});
