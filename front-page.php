@@ -33,7 +33,7 @@
 
 
 <div class="container">
-   <div id="carousel-homepage" class="carousel slide" data-ride="carousel" data-interval="7000">
+   <div id="carousel-homepage" class="carousel slide carousel-fade" data-ride="carousel" data-interval="7000">
       <div class="carousel-header"><strong>UN-HABITAT</strong> - Open data IATI visualization 
          <!-- Indicators -->
          <ol class="carousel-indicators">

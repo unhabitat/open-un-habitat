@@ -1540,3 +1540,23 @@ footer {
 .padding-top-slider{
    padding-top: 30px;
 }
+
+.carousel .item {
+   -webkit-transition: opacity 1s; 
+   -moz-transition: opacity 1s; 
+   -ms-transition: opacity 1s; 
+   -o-transition: opacity 1s; 
+   transition: opacity 1s;
+}
+
+.carousel .active.left {
+   left:0;
+   opacity:0;
+   z-index:2;
+}
+
+.carousel .next {
+   left:0;
+   opacity:1;
+   z-index:1;
+}
