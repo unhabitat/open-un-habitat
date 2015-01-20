@@ -294,7 +294,7 @@ h1.carousel-title {
 }
 .gray-col h2 {
    margin-top: 0;
-   min-height: 46px;
+   /*min-height: 46px;*/
 }
 /* Download buttons */
 
