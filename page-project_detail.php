@@ -69,17 +69,6 @@ require('incl/pager.php');
       <?php } ?>
 
 
-      <?php /*
-      <h2>Visualisation</h2>
-      <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/dummy-visualisation.jpg" alt="dummy" class="img-responsive"/>
-      
-
-      
-      <p> Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Vestibulum id ligula porta felis euismod semper. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-      <h2>Donors</h2>
-      <p> Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Vestibulum id ligula porta felis euismod semper. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-      */ ?>
-
       <h2>Document</h2>
       <?php if (!empty($activity->documents)){ ?>
       <p> <?php foreach($activity->documents as $document){ 
@@ -101,14 +90,18 @@ require('incl/pager.php');
       </p>
       <?php } ?>
 
+
+      <h2>Related projects</h2>
+      
+      <div class="row">
+         <div id="project-list-wrapper" class="related-projects-wrapper">
+            <?php include( TEMPLATEPATH .'/ajax/related-project-list-ajax.php' ); ?>
+         </div>
+      </div>
+
+
    </div>
    <div class="col-md-3 col-md-pull-9">
-      <?php /* niet meer van toepassing 
-      <div class="widget">
-         <button class="btn btn-default btn-block">save project</button>
-         <p style="margin-top:10px;"><a href="#">Sign in</a> or <a href="#">register</a> to save projects to your dashboard.</p>
-      </div>
-      */ ?>
    
       <div class="widget social-media-widget"> 
          <?php 
@@ -283,8 +276,6 @@ require('incl/pager.php');
          </div>
       </div>
 
-      
-
       <?php if(!empty($activity->contact_info)){ ?>
       <div class="widget contact">
          <h3>Main contact</h3>
@@ -300,90 +291,14 @@ require('incl/pager.php');
       <?php } ?>
    </div>
 </div>
-<div class="container">
-   <div class="projects-title-bar">
-      <h2>Similar projects</h2>
-   </div>
-</div>
-
-<?php 
-if(!empty($sector_codes)){
-   $sector_codes = str_replace(" ", "", $sector_codes);
-}
-
-$country_codes = array();
-
-if (!empty($activity->countries)) { 
-   
-   for($i = 0;$i < count($activity->countries);$i++){
-      array_push($country_codes, $activity->countries[$i]->code);
-   }
-   $country_codes = implode(",", $country_codes);
-} else {
-   $country_codes = "";
-}
-
-$_REQUEST['countries__in'] = $country_codes;
-$_REQUEST['sectors__in'] = $sector_codes;
-?>
-
-<div id="project-list-wrapper">
-   <?php include( TEMPLATEPATH .'/ajax/related-project-list-ajax.php' ); ?>
-</div>
-<div id="project-list-pagination" style="text-align:center"></div>
 
 <?php include( TEMPLATEPATH .'/footer-scripts.php' ); ?>
-
-
-
-<?php 
-// related requirements:
-// - same county
-// - same sector
-?>
 
 <script>
 
    Oipa.pageType = "activities";
-   var selection = new OipaSelection(1, 1);
-   Oipa.mainSelection = selection;
-
-   var filter = null;
-   var projectlist = null;
-
-   <?php
-
-   $_REQUEST['countries__in'] = $country_codes;
-   $_REQUEST['sectors__in'] = $sector_codes;
-
-   $country_codes = explode(",", $country_codes);
-   foreach($country_codes as $c){
-      echo "selection.countries.push({'id': '".$c."', 'name':'".$c."'});";
-   }
-
-   $sector_codes = explode(",", $sector_codes);
-   foreach($sector_codes as $s){
-      echo "selection.sectors.push({'id': '".$s."', 'name':'".$s."'});";
-   }
-
-   ?>
 
    $( document ).ready(function() {
-
-      filter = new OipaFilters();
-      Oipa.mainFilter = filter;
-      filter.selection = Oipa.mainSelection;
-      filter.init();
-
-      projectlist = new OipaProjectList();
-      projectlist.list_div = "#project-list-wrapper";
-      projectlist.pagination_div = "#project-list-pagination";
-      projectlist.selection = Oipa.mainSelection;
-      projectlist.init();
-      Oipa.lists.push(projectlist);
-
-
-
 
       var map = new OipaMap();
       map.set_map("project-detail-map", null);
@@ -391,14 +306,9 @@ $_REQUEST['sectors__in'] = $sector_codes;
       map.selection.group_by = "country";
       Oipa.maps.push(map);
       
-
-
       <?php 
 
-
       $region_codes = array();
-
-
 
       function add_iati_locations_to_map($activity){
          $exact_locs = array();
@@ -422,7 +332,6 @@ $_REQUEST['sectors__in'] = $sector_codes;
          }
          
       }
-
 
       function add_countries_to_map($activity){
          $loc_countries = array();
@@ -456,10 +365,7 @@ $_REQUEST['sectors__in'] = $sector_codes;
 
       load_geo_to_map($activity);
 
-      
-
       ?>
-
 
    });
 </script>

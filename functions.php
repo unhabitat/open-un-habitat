@@ -218,6 +218,55 @@ add_action( 'init', 'bs_slider_cpt', 0 );
 
 }
 
+
+
+// Register Custom Post Type
+function create_faq_post_type() {
+
+  $labels = array(
+    'name'                => _x( 'FAQ items', 'Post Type General Name', 'unhabitat' ),
+    'singular_name'       => _x( 'FAQ item', 'Post Type Singular Name', 'unhabitat' ),
+    'menu_name'           => __( 'FAQ items', 'unhabitat' ),
+    'parent_item_colon'   => __( 'Parent FAQ item:', 'unhabitat' ),
+    'all_items'           => __( 'All FAQ items', 'unhabitat' ),
+    'view_item'           => __( 'View FAQ item', 'unhabitat' ),
+    'add_new_item'        => __( 'Add New FAQ item', 'unhabitat' ),
+    'add_new'             => __( 'Add New', 'unhabitat' ),
+    'edit_item'           => __( 'Edit FAQ item', 'unhabitat' ),
+    'update_item'         => __( 'Update FAQ item', 'unhabitat' ),
+    'search_items'        => __( 'Search FAQ items', 'unhabitat' ),
+    'not_found'           => __( 'Not found', 'unhabitat' ),
+    'not_found_in_trash'  => __( 'Not found in Trash', 'unhabitat' ),
+  );
+  $args = array(
+    'label'               => __( 'FAQ', 'unhabitat' ),
+    'description'         => __( 'FAQ items', 'unhabitat' ),
+    'labels'              => $labels,
+    'supports'            => array( 'title', 'editor', 'page-attributes'),
+    'taxonomies'          => array( 'category' ),
+    'hierarchical'        => false,
+    'public'              => true,
+    'show_ui'             => true,
+    'show_in_menu'        => true,
+    'show_in_nav_menus'   => true,
+    'show_in_admin_bar'   => true,
+    'menu_position'       => 20,
+    'can_export'          => true,
+    'has_archive'         => true,
+    'exclude_from_search' => true,
+    'publicly_queryable'  => true,
+    'rewrite'             => false,
+    'capability_type'     => 'page',
+  );
+  register_post_type( 'faq', $args );
+
+}
+
+// Hook into the 'init' action
+add_action( 'init', 'create_faq_post_type', 0 );
+
+
+
 function add_rewrite_rules( $wp_rewrite ) 
 {
   $new_rules = array(

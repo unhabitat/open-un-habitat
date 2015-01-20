@@ -61,66 +61,69 @@
             
          </ol>
       </div>
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner">
+
       
-      <?php 
-         $args = array( 'post_type' => 'bs_slider', 'posts_per_page' => 1, 'offset' => 0 );
-         $the_query = new WP_Query( $args ); 
-         if ( $the_query->have_posts() ) {
-             while ( $the_query->have_posts() ) {
-                 $the_query->the_post(); 
-      ?>
-      
-       <div class="item active">
-          <div class="col-md-4">
-             <h1 class="carousel-title"><?php the_title(); ?></h1>
-             <?php the_content(); ?> 
+          <div class="col-md-4 padding-top-slider">
+             <h1 class="carousel-title"><?php echo get_post_meta( get_the_ID(), 'slider-title', true ); ?></h1>
+            <?php echo get_post_meta( get_the_ID(), 'slider-content', true ); ?> 
           </div>
           <div class="col-md-8">
-            <div id="hp-sector-slide" class="hp-total-wrapper">
-              <h2>Expenditure per sector</h2>
-              <hr>
-              <div class="row">
-                
-                <div class="col-md-8">
-                  <div class="hp-table-title"> Top 5 expenditures</div>
-                  <table class="table table-striped">
-                    <tbody>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+            
+            <?php 
+               $args = array( 'post_type' => 'bs_slider', 'posts_per_page' => 1, 'offset' => 0 );
+               $the_query = new WP_Query( $args ); 
+               if ( $the_query->have_posts() ) {
+                   while ( $the_query->have_posts() ) {
+                       $the_query->the_post(); 
+            ?>
+            
+             <div class="item active">
+              <div id="hp-sector-slide" class="hp-total-wrapper">
+                <h2>Expenditure per sector</h2>
+                <hr>
+                <div class="row">
+                  
+                  <div class="col-md-8">
+                    <div class="hp-table-title"> Top 5 expenditures</div>
+                    <table class="table table-striped">
+                      <tbody>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
 
-                <div class="col-md-4">
-                  <canvas id="hp-sector-pie-chart" width="183" height="183"></canvas>
-                  <div id="chartjs-tooltip"></div>
+                  <div class="col-md-4">
+                    <canvas id="hp-sector-pie-chart" width="183" height="183"></canvas>
+                    <div id="chartjs-tooltip"></div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-       </div>
-      
-      <?php 
+             
+        <?php 
          } // while
         } 
         wp_reset_postdata();
-
+        ?>
+            
+        <?php
 
 
          $args = array( 'post_type' => 'bs_slider', 'posts_per_page' => 1, 'offset' => 1 );
@@ -130,47 +133,41 @@
                  $the_query->the_post(); 
       ?>
       
-       <div class="item">
-          <div class="col-md-4">
-             <h1 class="carousel-title"><?php the_title(); ?></h1>
-             <?php the_content(); ?> 
-          </div>
-          <div class="col-md-8">
-            <div id="hp-country-slide" class="hp-total-wrapper">
-              <h2>Activities per country</h2>
-              <hr>
-              <div class="row">
-                <div class="col-md-8">
-                  <div class="hp-table-title"> Top 5 countries by activity</div>
-                  <table class="table table-striped">
-                    <tbody>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-md-4">
-                  <canvas id="hp-country-pie-chart" width="183" height="183"></canvas>
-                  <div id="chartjs-tooltip-1"></div>
-                </div>
+        <div class="item">
+          <div id="hp-country-slide" class="hp-total-wrapper">
+            <h2>Activities per country</h2>
+            <hr>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="hp-table-title"> Top 5 countries by activity</div>
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-md-4">
+                <canvas id="hp-country-pie-chart" width="183" height="183"></canvas>
+                <div id="chartjs-tooltip-1"></div>
               </div>
             </div>
           </div>
-       </div>
+        </div>
       
       <?php 
          } // while
@@ -187,54 +184,48 @@
                  $the_query->the_post(); 
       ?>
       
-       <div class="item">
-          <div class="col-md-4">
-             <h1 class="carousel-title"><?php the_title(); ?></h1>
-             <?php the_content(); ?> 
-          </div>
-          <div class="col-md-8">
-            <div id="hp-donor-slide" class="hp-total-wrapper">
-              <h2>Budget per donor</h2>
-              <hr>
-              <div class="row">
-                <div class="col-md-8">
-                  <div class="hp-table-title"> Top 5 donors by budget</div>
-                  <table class="table table-striped">
-                    <tbody>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-md-4">
-                  <canvas id="hp-donor-pie-chart" width="183" height="183"></canvas>
-                  <div id="chartjs-tooltip-2"></div>
-                </div>
+        <div class="item">
+          <div id="hp-donor-slide" class="hp-total-wrapper">
+            <h2>Budget per donor</h2>
+            <hr>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="hp-table-title"> Top 5 donors by budget</div>
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-md-4">
+                <canvas id="hp-donor-pie-chart" width="183" height="183"></canvas>
+                <div id="chartjs-tooltip-2"></div>
               </div>
             </div>
           </div>
-       </div>
+        </div>
       
       <?php 
          } // while
         } 
         wp_reset_postdata(); ?>
 
-
+</div>
       </div>
    </div>
 </div>

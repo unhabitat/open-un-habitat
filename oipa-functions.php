@@ -38,7 +38,7 @@ function oipa_generate_results(&$objects, &$meta, $perspective = null){
 		$search_url .= "&order_by=start_planned";
 		$search_url .= "&order_by_asc_desc=desc";
 	}
-	
+
 	$content = file_get_contents($search_url);
 	$result = json_decode($content);
 	$meta = $result->meta;
@@ -139,6 +139,9 @@ function oipa_generate_link_parameters($filter_to_unset=null){
 
 function oipa_filter_request($search_url){
 
+	if(isset($_REQUEST['id__in'])) {
+		$search_url .= "&id__in=" . $_REQUEST['id__in'];
+	}
 
     if(isset($_REQUEST['countries__in'])) {
 		$search_url .= "&countries__in=" . $_REQUEST['countries__in'];

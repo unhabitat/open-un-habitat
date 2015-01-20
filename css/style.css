@@ -1422,6 +1422,7 @@ footer {
    -moz-box-shadow: 2px 2px 6px #aaa;
    -webkit-box-shadow: 2px 2px 6px #aaa;
    box-shadow: 2px 2px 6px #aaa;
+   height: 340px;
 }
 
 .hp-total-wrapper a{
@@ -1507,4 +1508,35 @@ footer {
    pointer-events: none;
    -webkit-transform: translate(-50%, 0);
    transform: translate(-50%, 0);
+}
+
+.related-projects-wrapper .project-col-2 h2, .related-projects-wrapper .project-col-2 h2 a{
+   font-size: 16px;
+}
+
+.related-projects-wrapper .project-col-1 > ul > li, .related-projects-wrapper .sector{
+   font-size: 12px;
+}
+
+.related-projects-wrapper .budget{
+   font-size: 18px;
+}
+
+.related-projects-wrapper{
+   font-size: 12px;
+}
+
+.related-projects-wrapper .clear-both{
+   clear: both;
+}
+
+.no-related-projects{
+   font-size: 14px;
+}
+.related-projects-wrapper p{
+   margin: 0 0 6px;
+}
+
+.padding-top-slider{
+   padding-top: 30px;
 }

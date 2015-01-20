@@ -1,22 +1,26 @@
 <?php 
 
-if (isset($country_id)){
-   $_REQUEST['countries__in'] = $country_id;
+$related_activities = array();
+
+if (!empty($activity->related_activities)) { 
+   
+   for($i = 0;$i < count($activity->related_activities);$i++){
+      array_push($related_activities, $activity->related_activities[$i]->ref);
+   }
+   $related_activities = implode(",", $related_activities);
+} else {
+   $related_activities = "";
 }
 
-if (isset($donor_id)){
-   $_REQUEST['donors__in'] = $donor_id;
-}
-
+$_REQUEST['id__in'] = $related_activities;
 
 oipa_generate_results($objects, $meta, null);
 
 if(empty($objects)){
    ?>
 
-   <div class="container projects">
-   <div class="col-md-12">
-      <hr>No projects found.
+   <div class="col-md-12 no-related-projects">
+      No related projects found.
    </div>
 
    <?php
@@ -26,10 +30,7 @@ if(empty($objects)){
 foreach($objects AS $idx=>$related_activity) {
 ?>
 
-<div class="container projects">
-   <div class="col-md-12">
-      <hr>
-   </div>
+<div class="projects">
    <div class="col-md-6 project-col-2 col-md-push-3"> <span class="sector"><strong>Sector: </strong><?php if(!empty($related_activity->sectors)) { echo $related_activity->sectors[0]->name; } ?></span>
       <h2><a href="<?php echo home_url(); ?>/project/<?php echo $related_activity->id; ?>/"><?php if(!empty($related_activity->titles)) { echo $related_activity->titles[0]->title; } ?></a></h2>
    </div>
@@ -86,7 +87,7 @@ foreach($objects AS $idx=>$related_activity) {
       </span></p>
    </div>
 </div>
-<div class="container">
+<div class="clear-both">
    <div class="col-md-3">&nbsp;</div>
    <div class="col-md-6"><span class="last-update">Latest Update <?php if(!empty($related_activity->last_updated_datetime)){ 
       $last_updated = strtotime($related_activity->last_updated_datetime);
@@ -94,10 +95,12 @@ foreach($objects AS $idx=>$related_activity) {
    } ?></span></div>
    <div class="col-md-3">&nbsp;</div>
 </div>
+<div class="clear-both">
+   <div class="col-md-12">
+      <hr>
+   </div>
+</div>
 
 <?php 
 } ?>
-
-
-<input type="hidden" class="list-amount-input" value="<?php echo $meta->total_count; ?>">
 

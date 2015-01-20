@@ -5,7 +5,6 @@
 <script>
  $('.selectpickr').selectpicker();
  </script>
-
 <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/jquery.bootpag.min.js"></script> 
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/oipa.js"></script>
