@@ -24,7 +24,17 @@ require('incl/pager.php');
 <div class="container project-detail">
    <div class="col-md-9 col-md-push-3">
       <h1 class="project-title"><?php if(!empty($activity->titles)){ echo $activity->titles[0]->title; }  ?></h1>
-      <p><?php if(!empty($activity->descriptions)){ echo $activity->descriptions[0]->description; }  ?></p>
+      
+      <div class="row">
+         <div class="col-md-7">
+            <p><?php if(!empty($activity->descriptions)){ echo $activity->descriptions[0]->description; }  ?></p>
+         </div>
+         <div class="col-md-5">
+            <div id="project-detail-map"></div>
+         </div>
+      </div>
+
+      <div style="clear:both;"></div>
       <h2>Financials</h2>
       <?php if(empty($activity->transactions)){
          echo "Not available";
@@ -230,12 +240,16 @@ require('incl/pager.php');
 
       </div>
 
+      <?php /*
+
       <div class="widget">
          <h3>Location</h3>
             
-         <div id="project-detail-map"></div>
+         
          <div class="clearfix"></div>
       </div>
+
+      */ ?>
 
       <div class="widget">
          <h3>Export project IATI data</h3>

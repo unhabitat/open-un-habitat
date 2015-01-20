@@ -99,6 +99,10 @@ SectorPieChart.prototype.search_sector = function(sector_id){
 
 SectorPieChart.prototype.format_data = function(){
     var data = []
+    var randomColors = randomColor({
+        hue: 'blue',
+        count: this.aggregation_data.length
+    });
 
     for (var i = 0; i < this.aggregation_data.length;i++){
 
@@ -108,7 +112,7 @@ SectorPieChart.prototype.format_data = function(){
 
         data.push({
             value: value,
-            color: randomColor(),
+            color: randomColors[i],
             highlight: "#FFC870",
             label: sector_name
         });
@@ -343,12 +347,16 @@ CountryPieChart.prototype.search_sector = function(sector_id){
 CountryPieChart.prototype.format_data = function(){
 
     var data = [];
+    var randomColors = randomColor({
+        hue: 'blue',
+        count: this.aggregation_data.objects.length
+    });
 
     for (var i = 0; i < this.aggregation_data.objects.length;i++){
         data.push({
             id: this.aggregation_data.objects[i].id,
             value: this.aggregation_data.objects[i].total_projects,
-            color: randomColor(),
+            color: randomColors[i],
             highlight: "#FFC870",
             label: this.aggregation_data.objects[i].name
         });
@@ -545,13 +553,17 @@ DonorPieChart.prototype.search_sector = function(sector_id){
 
 DonorPieChart.prototype.format_data = function(){
     var data = [];
+    var randomColors = randomColor({
+        hue: 'blue',
+        count: this.aggregation_data.objects.length
+    });
 
     for (var i = 0; i < this.aggregation_data.objects.length;i++){
 
         data.push({
             id: this.aggregation_data.objects[i].id,
             value: this.aggregation_data.objects[i].total_budget,
-            color: randomColor(),
+            color: randomColors[i],
             highlight: "#FFC870",
             label: this.aggregation_data.objects[i].name
         });

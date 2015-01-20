@@ -1399,6 +1399,10 @@ footer {
    height: 370px;
 }
 
+#project-detail-map{
+   height: 300px;
+}
+
 
 #embed-page .project-title a{
    color: #1C7FD7;
