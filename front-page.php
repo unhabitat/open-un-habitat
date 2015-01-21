@@ -18,7 +18,6 @@
 
             <div id="vis"></div>
 
-              
          </div>
          <div class="circle-package-wrapper project-vis-wrapper"></div>
       </div>
@@ -259,8 +258,10 @@ wp_reset_postdata();
 
 <script>
 
+var screen_width = $(window).width();
+
 var load_scatter_plot = false;
-if (Math.random() > 0.5){
+if (Math.random() > 0.5 && screen_width > 800){
   load_scatter_plot = true;
 }
 </script>

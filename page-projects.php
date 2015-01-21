@@ -90,7 +90,14 @@ Template Name: Projects template
       var stats = new OipaMainStats();
       var total_projects = stats.get_total_projects();
 
-      load_scatter_plot = true;
+
+      var load_scatter_plot = false;
+      var screen_width = $(window).width();
+
+      if(screen_width > 800){
+         load_scatter_plot = true;
+      }
+      
    });
 
 
