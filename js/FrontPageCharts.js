@@ -107,11 +107,11 @@ SectorPieChart.prototype.format_data = function(){
     for (var i = 0; i < this.aggregation_data.length;i++){
 
         var sector_id = this.aggregation_data[i].group_field;
-        var value = this.aggregation_data[i].aggregation_field;
         var sector_name = this.search_sector(sector_id);
 
         data.push({
-            value: value,
+            id: sector_id,
+            value: this.aggregation_data[i].aggregation_field,
             color: randomColors[i],
             highlight: "#FFC870",
             label: sector_name
@@ -144,6 +144,30 @@ SectorPieChart.prototype.get_sector_data = function(){
     });
 }
 
+SectorPieChart.prototype.load_listeners = function(){
+    $("#" + this.id).click( 
+        function(evt){
+            var activePoints = spc.chart.getSegmentsAtEvent(evt); 
+            if(activePoints.length > 0){
+                var clicked_name = activePoints[0].label;
+                var clicked_id = null;
+
+                for(var i = 0;i < spc.sector_data.objects.length;i++){
+                    if (spc.sector_data.objects[i].name == clicked_name){
+                        clicked_id = spc.sector_data.objects[i].code;
+                        break;
+                    }
+                }
+
+                var url = site_url + "/projects/?sectors__in=" + clicked_id;
+
+                window.location = url;
+            }
+        }
+    ); 
+}
+
+
 SectorPieChart.prototype.load_chart = function(){
     
     formatted_data = this.format_data();
@@ -154,6 +178,8 @@ SectorPieChart.prototype.load_chart = function(){
     this.init(formatted_data);
     
     this.load_table(sorted_formatted_data);
+
+    this.load_listeners();
 }
 
 SectorPieChart.prototype.sort_formatted_data_by_value = function(data){
@@ -176,8 +202,9 @@ SectorPieChart.prototype.load_table = function(data){
     var html = "";
 
     for(var i = 0;i < 5;i++){
-        html += "<tr><td class='hp-table-nr'>"+(i+1)+". </td><td>"+data[i].label+"</td>";
-        html += "<td class='hp-table-value'>US$ "+comma_formatted(data[i].value)+"</td></tr>";
+        html += "<tr><td class='hp-table-nr'>"+(i+1)+". </td>";
+        html += "<td><a href='"+site_url+"/projects/?sectors__in="+data[i].id+"'>"+data[i].label+"</a></td>";
+        html += "<td class='hp-table-value'><a href='"+site_url+"/projects/?sectors__in="+data[i].id+"'>US$ "+comma_formatted(data[i].value)+"</a></td></tr>";
     }
 
     $("#hp-sector-slide table tbody").html(html);

@@ -108,11 +108,16 @@ require('incl/pager.php');
       <div class="widget social-media-widget"> 
          <?php 
          $current_url = $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
-         $current_title = the_title('', '', false);
+          if(!empty($activity->titles)){ 
+            $current_title = $activity->titles[0]->title; 
+          } else {
+            $current_title = "UN-Habitat project";
+          }
          ?>
          <div class="openunh-share-buttons">
-            <a id="openunh-share-linkedin" href="http://www.linkedin.com/shareArticle?mini=true&url=<?php echo urlencode("http://" . $current_url); ?>&title=<?php echo $current_title; ?>" target="_blank"></a>
-            <a id="openunh-share-twitter" href="http://twitter.com/home?status=<?php echo urlencode($current_title . " | " . $current_url); ?>" target="_blank"></a>
+            <a id="openunh-share-linkedin" href="http://www.linkedin.com/shareArticle?mini=true&url=<?php echo urlencode("http://" . $current_url); ?>&title=<?php echo urlencode($current_title . " - #IATI projects by @UNHABITAT " . "http://" . $current_url); ?>" target="_blank"></a>
+            <?php $current_title = substr($current_title, 0, 60) . "..."; ?>
+            <a id="openunh-share-twitter" href="http://twitter.com/home?status=<?php echo urlencode($current_title . " - #IATI projects by @UNHABITAT " . "http://" . $current_url); ?>" target="_blank"></a>
             <a id="openunh-share-facebook" href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=<?php echo $current_url; ?>" target="_blank"></a>
             <a id="openunh-share-googleplus" href="https://plus.google.com/share?url=<?php echo $current_url; ?>" target="_blank"></a>
          </div>
