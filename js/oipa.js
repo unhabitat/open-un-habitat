@@ -396,6 +396,7 @@ function OipaCountryList(){
 		jQuery(".country-list-wrapper form").submit(function(e){
 			e.preventDefault();
 			otherlist.selection.country = jQuery("#grouped-list-search").val();
+			otherlist.offset = 0;
 			otherlist.refresh();
 			Oipa.refresh_maps();
 		});
@@ -466,6 +467,7 @@ function OipaDonorList(){
 		jQuery(".donor-list-wrapper form").submit(function(e){
 			e.preventDefault();
 			otherlist.selection.donor = jQuery("#grouped-list-search").val();
+			otherlist.offset = 0;
 			otherlist.refresh();
 		});
 		
