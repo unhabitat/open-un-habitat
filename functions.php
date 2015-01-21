@@ -292,4 +292,40 @@ $footer_sidebar_args = array(
 ); 
  register_sidebar( $footer_sidebar_args );
 
-?>
+function get_activity_id(){
+  if (isset($_GET['id'])){
+    $id = $_GET['id'];
+  } else if(isset($_GET['iati_id'])){
+    $id = $_GET['iati_id'];
+  } else {
+     $url_parts = explode("/", $_SERVER["REQUEST_URI"]);
+     $partamount = count($url_parts);
+     $id = $url_parts[($partamount -2)];
+  }
+
+  return $id;
+}
+
+
+
+add_filter('wpseo_title', 'filter_product_wpseo_title');
+function filter_product_wpseo_title($title) {
+    if(  is_page( 'project') ) {
+
+        
+        $identifier = get_activity_id();
+
+        $search_url = "http://dev.oipa.openaidsearch.org/api/v3/activities/{$identifier}/?format=json";
+
+        $content = @file_get_contents($search_url);
+        $activity = json_decode($content);
+
+        if(!empty($activity->titles)){ 
+          $title = $activity->titles[0]->title; 
+        } else {
+          $title = "Unknown";
+        }
+
+    }
+    return $title;
+}

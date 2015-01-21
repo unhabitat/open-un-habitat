@@ -5,15 +5,7 @@ Template Name: Project detail template
 
 get_header(); 
 
-if (isset($_GET['id'])){
-  $id = $_GET['id'];
-} else if(isset($_GET['iati_id'])){
-  $id = $_GET['iati_id'];
-} else {
-   $url_parts = explode("/", $_SERVER["REQUEST_URI"]);
-   $partamount = count($url_parts);
-   $id = $url_parts[($partamount -2)];
-}
+$id = get_activity_id();
 
 $activity = oipa_get_activity($id);
 

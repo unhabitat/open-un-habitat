@@ -26,7 +26,7 @@
 </div>
 
 <div class="container map-alt-mobile">
-   <div class="col-md-12"> <a href="projects.html" class="btn btn-primary btn-lg btn-block">View projects</a> </div>
+   <div class="col-md-12"> <a href="<?php echo home_url() . '/projects/'; ?>" class="btn btn-primary btn-lg btn-block">View projects</a> </div>
    <div class="spacer"></div>
 </div>
 
