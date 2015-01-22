@@ -74,9 +74,7 @@ Template Name: Projects template
       var filter = new OipaFilters();
       Oipa.mainFilter = filter;
       filter.selection = Oipa.mainSelection;
-      filter.init();
-
-      
+      filter.init();      
 
       projectlist = new OipaProjectList();
       projectlist.list_div = "#project-list-wrapper";
@@ -89,8 +87,6 @@ Template Name: Projects template
 
       var stats = new OipaMainStats();
       var total_projects = stats.get_total_projects();
-
-
       var load_scatter_plot = false;
       var screen_width = $(window).width();
 
@@ -99,7 +95,6 @@ Template Name: Projects template
       }
       
    });
-
 
 </script>
 <script defer src="<?php echo get_stylesheet_directory_uri(); ?>/js/plugins.js"></script>

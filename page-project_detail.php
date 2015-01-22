@@ -19,7 +19,13 @@ require('incl/pager.php');
       
       <div class="row">
          <div class="col-md-7">
-            <p><?php if(!empty($activity->descriptions)){ echo $activity->descriptions[0]->description; }  ?></p>
+            <p>
+               <div class="project-description">
+                  <?php if(!empty($activity->descriptions)){ 
+                     echo $activity->descriptions[0]->description;
+                  }  ?>
+               </div>
+            </p>
          </div>
          <div class="col-md-5">
             <div id="project-detail-map"></div>
@@ -378,11 +384,19 @@ require('incl/pager.php');
 
       ?>
 
+
+      
+
    });
 </script>
 
-   
-
-
-
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/readmore.min.js"></script>
+<script>
+   $(".project-description").readmore({
+      speed: 75,
+      collapsedHeight: 220,
+      lessLink: '',
+      moreLink: '<a href="#">Read More</a>'
+   });
+</script>
 <?php get_footer(); ?>
