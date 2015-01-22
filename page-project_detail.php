@@ -318,7 +318,7 @@ require('incl/pager.php');
    $( document ).ready(function() {
 
       var map = new OipaMap();
-      map.set_map("project-detail-map", null);
+      map.set_map("project-detail-map", null, true);
       map.selection = Oipa.mainSelection;
       map.selection.group_by = "country";
       Oipa.maps.push(map);
@@ -342,7 +342,6 @@ require('incl/pager.php');
          if (!empty($exact_locs)){
             echo "map.show_project_detail_locations('exact_location', '" . json_encode($exact_locs) . "');";
          } else {
-
 
             $activity->locations = null;
             load_geo_to_map($activity);
@@ -383,8 +382,6 @@ require('incl/pager.php');
       load_geo_to_map($activity);
 
       ?>
-
-
       
 
    });

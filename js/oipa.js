@@ -492,7 +492,7 @@ function OipaMap(){
 		this.basemap = standard_basemap;
 	}
 
-	this.set_map = function(div_id, zoomposition){
+	this.set_map = function(div_id, zoomposition, no_dragging){
 
 		var mapoptions = {
 			attributionControl: false,
@@ -501,6 +501,10 @@ function OipaMap(){
 			minZoom: 2,
 			maxZoom:12,
 			continuousWorld: 'false'
+		}
+
+		if(no_dragging){
+			mapoptions.dragging = false;
 		}
 
 		if(zoomposition || zoomposition == null){
