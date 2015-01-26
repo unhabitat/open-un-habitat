@@ -5,7 +5,7 @@ body {
    padding-top: 105px;
 }
 
-.project-detail a {
+.project-detail .col-md-7 a {
    color: #1C7FD7;
 }
 
