@@ -4,6 +4,11 @@ body {
    min-height: 800px;
    padding-top: 105px;
 }
+
+.project-detail a {
+   color: #1C7FD7;
+}
+
 .map-alt-mobile {
    display: none;
 }
