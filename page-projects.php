@@ -108,4 +108,4 @@ Template Name: Projects template
 <script type="text/coffeescript" src="<?php echo get_stylesheet_directory_uri(); ?>/coffee/vis.coffee"></script>
 */ ?>
 
-<?php get_footer(); ?>
+<?php get_footer(); 

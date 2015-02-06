@@ -26,7 +26,7 @@
       
       <div class="disclaimer">
 
-         <?php  dynamic_sidebar( 'openunh-footer' ); ?>
+         <?php dynamic_sidebar( 'openunh-footer' ); ?>
 
       </div>
       <div class="footer-logo"><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/un-habitat-logo-footer.png" width="376" height="68" class="img-responsive" alt="UN-Habitat Logo"/></div>
