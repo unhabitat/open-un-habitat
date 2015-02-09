@@ -144,7 +144,7 @@ require('incl/pager.php');
             <div class="clearfix"></div>
          </div>
          <div class="info-row">
-            <div class="info-col-1">IATI Indentifier</div>
+            <div class="info-col-1">IATI Identifier</div>
             <div class="info-col-2"><strong><?php echo $activity->iati_identifier; ?></strong></div>
             <div class="clearfix"></div>
          </div>
