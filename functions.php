@@ -312,7 +312,7 @@ function filter_product_wpseo_title($title) {
         
         $identifier = get_activity_id();
 
-        $search_url = OIPA_URL . "activities/{$identifier}/?format=json";
+        $search_url = "http://www.oipa.nl/api/v3/activities/{$identifier}/?format=json";
 
         $content = @file_get_contents($search_url);
         $activity = json_decode($content);
@@ -322,7 +322,6 @@ function filter_product_wpseo_title($title) {
         } else {
           $title = "Unknown";
         }
-
     }
     return $title;
 }
