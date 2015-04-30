@@ -290,7 +290,7 @@ $footer_sidebar_args = array(
   'before_title'  => '',
   'after_title'   => '' 
 ); 
- register_sidebar( $footer_sidebar_args );
+register_sidebar( $footer_sidebar_args );
 
 function get_activity_id(){
   if (isset($_GET['id'])){
@@ -306,16 +306,13 @@ function get_activity_id(){
   return $id;
 }
 
-
-
 add_filter('wpseo_title', 'filter_product_wpseo_title');
 function filter_product_wpseo_title($title) {
     if(  is_page( 'project') ) {
-
         
         $identifier = get_activity_id();
 
-        $search_url = "http://dev.oipa.openaidsearch.org/api/v3/activities/{$identifier}/?format=json";
+        $search_url = OIPA_URL . "activities/{$identifier}/?format=json";
 
         $content = @file_get_contents($search_url);
         $activity = json_decode($content);

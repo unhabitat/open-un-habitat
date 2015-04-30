@@ -4,7 +4,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-define( 'OIPA_URL', 'http://dev.oipa.openaidsearch.org/api/v3/');
+define( 'OIPA_URL', 'http://www.oipa.nl/api/v3/');
 // define( 'OIPA_URL', 'http://localhost:8000/api/v3/');
 if (function_exists("site_url")){
 	define( 'SITE_URL', site_url());
